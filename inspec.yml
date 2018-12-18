@@ -1,9 +1,36 @@
-name: IIS 8.5 Site Security Technical Implementation Guide
-title: IIS 8.5 Site Security Technical Implementation Guide
-maintainer: The Authors
-copyright: The Authors
-copyright_email: you@example.com
+name: cis-mysql-server-enterprise-v5.7-baseline
+title: CIS baseline for Mysql server enterprise edition 5.7
+maintainer: MITRE InSpec Team
+copyright: The MITRE Corporation, 2018
+copyright_email: opensource@mitre.org
 license: Apache-2.0
-Description: This Security Technical Implementation Guide is published as a tool to improvethe security of Department of Defense (DoD) information systems. 
+Description: An InSpec Compliance Profile. 
 version: 0.1.0
- 
+supports:
+  platform: os
+inspec_version: "~> 3.0"
+
+attributes:
+  - name: user
+    description: 'username MSSQL DB Server'
+    type: string
+    default: 'root'
+
+  - name: password
+    description: 'password MSSQL DB Server'
+    type: string
+    default: 'P@ssw0rd1'
+
+  - name: host
+    description: 'hostname MSSQL DB Server'
+    default: 'localhost'
+
+  - name: port
+    description: 'port MSSQL DB Server'
+    type: numeric
+    default: 3306
+
+  - name: mysql_users
+    description: 'List of mysql database users'
+    type: array
+    default: ['root']   
