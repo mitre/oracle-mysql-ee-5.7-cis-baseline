@@ -2,11 +2,11 @@ control "5.9" do
   title "Ensure DML/DDL Grants Are Limited to Specific Databases and Users (Scored)"
   desc  "DML/DDL includes the set of privileges used to modify or create data structures. 
   This includes INSERT, SELECT, UPDATE, DELETE, DROP, CREATE, and ALTER privileges."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "5.9"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "
   Execute the following SQL statement to audit this setting:
     SELECT User,Host,Db 
@@ -32,7 +32,31 @@ control "5.9" do
      REVOKE CREATE ON <host>.<database> FROM <user>; 
      REVOKE DROP ON <host>.<database> FROM <user>; 
      REVOKE ALTER ON <host>.<database> FROM <user>;"
-  tag "Default Value": ""
+  query = %(SELECT User
+    FROM mysql.db
+    WHERE Select_priv='Y'
+      OR Insert_priv='Y' 
+      OR Update_priv='Y' 
+      OR Delete_priv='Y' 
+      OR Create_priv='Y' 
+      OR Drop_priv='Y'
+      OR Alter_priv='Y';)
+  sql_session = mysql_session(attribute('user'),attribute('password'),attribute('host'),attribute('port'))
+  mysql_user_privs = sql_session.query(query).stdout.strip.split("\n") 
 
-  
+  if !mysql_user_privs.empty?
+    mysql_user_privs.each do |user|
+      describe "The mysql user: #{user} with privileges to modify or create data structures" do
+        subject { user }
+        it { should be_in attribute('mysql_users_allowed_modify_or_create') }
+      end
+    end
+  end
+  if mysql_user_privs.empty?
+    impact 0.0
+    desc 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable'
+    describe 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable' do
+      skip 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable'
+    end
+  end
 end

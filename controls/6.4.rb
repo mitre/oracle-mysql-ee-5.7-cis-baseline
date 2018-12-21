@@ -2,11 +2,11 @@ control "6.4" do
   title "Ensure 'log-raw' Is Set to 'OFF' (Scored)"
   desc  "The log-raw MySQL option determines whether passwords are rewritten by the server so as not to appear in log files as plain text. 
   If log-raw is enabled, then passwords are written to the various log files (general query log, slow query log, and binary log) in plain text."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"  
   tag "cis_id": "6.4"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "
   Perform the following actions to assess this recommendation:
   • Open the MySQL configuration file (my.cnf)

@@ -2,11 +2,11 @@ control "4.2" do
   title "Ensure the 'test' Database Is Not Installed (Scored)"
   desc  "The default MySQL installation comes with an unused database called test. 
   It is recommended that the test database be dropped"
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5 
+  tag "severity": "medium" 
   tag "cis_id": "4.2"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "
   Execute the following SQL statement to determine if the test database is present:
     SHOW DATABASES LIKE 'test';
@@ -14,7 +14,6 @@ control "4.2" do
   tag "fix": "Execute the following SQL statement to drop the test database:
     DROP DATABASE 'test';
   Note: mysql_secure_installation performs this operation as well as other security- related activities"
-  tag "Default Value": ""
 
   query = %(SHOW DATABASES LIKE 'test';)
 

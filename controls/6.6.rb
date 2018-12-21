@@ -1,11 +1,11 @@
 control "6.6" do
   title "Ensure audit_log_exclude_accounts is set to NULL (Scored)"
   desc  "The audit_log_exclude_accounts variable enables the administrator to set accounts for which events will not be logged in the audit log."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5 
+  tag "severity": "medium"  
   tag "cis_id": "6.6"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     SHOW VARIABLES LIKE '%audit_log_exclude_accounts%';
   Ensure the resulting audit_log_exclude_accounts value is NULL."

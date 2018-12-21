@@ -1,11 +1,11 @@
 control "3.1" do
   title "Ensure 'datadir' Has Appropriate Permissions and Ownership (Scored)"
   desc  "The data directory is the location of the MySQL databases."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "3.1"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of datadir
       show variables where variable_name = 'datadir';
@@ -16,9 +16,6 @@ control "3.1" do
   tag "fix": "Execute the following commands at a terminal prompt:
       chmod 700 <datadir>
       chown mysql:mysql <datadir>"
-  tag "Default Value": ""
-
-
 
   query = %(select @@datadir;)
   sql_session = mysql_session(attribute('user'),attribute('password'),attribute('host'),attribute('port'))
@@ -31,5 +28,5 @@ control "3.1" do
     its('group') { should eq 'mysql' }
     its('mode') { should be <= 0700 }
   end
-
+  only_if { os.linux? }
 end

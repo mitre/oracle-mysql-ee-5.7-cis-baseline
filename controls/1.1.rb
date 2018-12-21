@@ -3,11 +3,11 @@ control "1.1" do
   desc  "It is generally accepted that host operating systems should include different filesystem partitions for different purposes. 
   One set of filesystems are typically called system partitions, and are generally reserved for host system/application operation. 
   The other set of filesystems are typically called non-system partitions, and such locations are generally reserved for storing data."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5 
+  tag "severity": "medium"
   tag "cis_id": "1.1"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Execute the following steps to assess this recommendation:
   • Discover the datadir by executing the following SQL statement
   show variables where variable_name = 'datadir';
@@ -30,7 +30,7 @@ control "1.1" do
   tag "Default Value": "Not Applicable"
 
   query = %(select @@datadir;)
-  #datadir = mysql_session('root','P@ssw0rd1').query("select @@datadir").stdout.strip
+
   sql_session = mysql_session(attribute('user'),attribute('password'),attribute('host'),attribute('port'))
            
   datadir = sql_session.query(query).stdout.strip.split
@@ -49,4 +49,5 @@ control "1.1" do
    subject { command("df -h #{datadir}").stdout }
     it {should_not include '/usr'}
   end
+  only_if { os.linux? }
 end

@@ -5,11 +5,11 @@ control "6.3" do
   NOTE: log_warnings has been deprecated as of MySQL 5.7.2. 
   Setting log_warnings will also cause log_error_verbosity to be set.The variable scope for log_warnings is global.
   "
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5 
+  tag "severity": "medium"  
   tag "cis_id": "6.3"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 2
+  tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'log_warnings';
   Ensure the Value returned equals 2."

@@ -2,11 +2,11 @@ control "3.7" do
   title "Ensure SSL Key Files Have Appropriate Permissions and Ownership (Scored)"
   desc  "When configured to use SSL/TLS, MySQL relies on key files, which are stored on the host's filesystem. 
   These key files are subject to the host's permissions and ownership structure."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "3.7"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "To assess this recommendation, locate the SSL key in use by executing the following SQL statement to get the Value of ssl_key:
   show variables where variable_name = 'ssl_key';
   Then, execute the following command to assess the permissions of the Value:
@@ -15,7 +15,6 @@ control "3.7" do
   tag "fix": "Execute the following commands at a terminal prompt to remediate these settings using the Value from the audit procedure:
     chown mysql:mysql <ssl_key Value> 
     chmod 400 <ssl_key Value>"
-  tag "Default Value": ""
 
   query = %(select @@ssl_key;)
 
@@ -29,4 +28,5 @@ control "3.7" do
     its('group') { should eq 'mysql' }
     its('mode') { should be <= 0400 }
   end
+  only_if { os.linux? }
 end

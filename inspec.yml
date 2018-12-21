@@ -3,6 +3,7 @@ title: CIS baseline for Mysql server enterprise edition 5.7
 maintainer: MITRE InSpec Team
 copyright: The MITRE Corporation, 2018
 copyright_email: opensource@mitre.org
+summary: The CIS Mysql Server Enterprise Edition Benchmark InSpec profile.
 license: Apache-2.0
 Description: An InSpec Compliance Profile. 
 version: 0.1.0
@@ -34,3 +35,18 @@ attributes:
     description: 'List of mysql database users'
     type: array
     default: ['root']   
+
+  - name: is_mysql_server_slave_configured
+    description: 'Set to true if the mysql server has a slave configured'
+    type: boolean
+    default: true
+
+  - name: mysql_administrative_users
+    description: 'List of mysql administrative users'
+    type: array
+    default: ['root'] 
+
+  - name: mysql_users_allowed_modify_or_create
+    description: 'List of mysql users allows to modify or create data structures'
+    type: array
+    default: ['root'] 

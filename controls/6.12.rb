@@ -1,11 +1,11 @@
 control "6.12" do
   title "Make sure the audit plugin can't be unloaded (Scored)"
   desc  "Set audit_log to FORCE_PLUS_PERMANENT"
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "6.12"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     SELECT LOAD_OPTION FROM information_schema.plugins WHERE PLUGIN_NAME='audit_log';
   The result must be FORCE_PLUS_PERMANENT"

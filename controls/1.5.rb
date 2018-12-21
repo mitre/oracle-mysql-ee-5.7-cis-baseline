@@ -1,11 +1,11 @@
 control "1.5" do
   title "Disable Interactive Login (Scored)"
   desc  "When created, the MySQL user may have interactive access to the operating system, which means that the MySQL user could login to the host as any other user would"
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "1.5"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
-  tag "cis_level": 1
+  tag "cis_level": 2
+  tag "Profile Applicability": "Level 2 - MySQL RDBMS on Linux"
   tag "audit text": "Execute the following command to assess this recommendation
   getent passwd mysql | egrep '^.*[\/bin\/false|\/sbin\/nologin]$''
   Lack of output implies a finding"
@@ -13,7 +13,6 @@ control "1.5" do
   • Execute one of the following commands in a terminal
   usermod -s /bin/false 
   usermod -s /sbin/nologin"
-  tag "Default Value": ""
 
   describe.one do
     describe passwd.users('mysql') do
@@ -23,4 +22,5 @@ control "1.5" do
      its('shells') { should cmp '/sbin/nologin' }
     end
   end
+  only_if { os.linux? }
 end

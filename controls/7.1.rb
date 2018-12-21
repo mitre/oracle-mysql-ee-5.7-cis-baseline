@@ -5,11 +5,11 @@ control "7.1" do
     • 0 - authenticate with the mysql_native_password plugin
     • 1 - authenticate with the mysql_old_password plugin
     • 2 - authenticate with the sha256_password plugin"
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5
+  tag "severity": "medium"
   tag "cis_id": "7.1"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "
   Execute the following SQL statement to assess this recommendation:
     SHOW VARIABLES WHERE Variable_name = 'old_passwords';
@@ -28,4 +28,5 @@ control "7.1" do
     subject { old_passwords  }
     it {should_not cmp 1 }
   end
+  only_if { os.linux? }
 end

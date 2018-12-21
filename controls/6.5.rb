@@ -1,11 +1,11 @@
 control "6.5" do
   title "Ensure audit_log_connection_policy is not set to 'NONE' (Scored)"
   desc  "The audit_log_connection_policy variable controls how the audit plugin writes connection events to the audit log file."
-  impact 0.5 #double check
-  tag "severity": "medium"  #double check
+  impact 0.5 
+  tag "severity": "medium"  
   tag "cis_id": "6.5"
-  tag "cis_control": ["No CIS Control", "6.1"] #don't know
   tag "cis_level": 1
+  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     show variables like '%audit_log_connection_policy%';
   Ensure the value is set to either ERRORS or ALL.
