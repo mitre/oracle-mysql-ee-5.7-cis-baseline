@@ -1,72 +1,56 @@
-# cis-mysql-server-enterprise-v5.7-baseline
+# Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline
 
-InSpec profile testing secure configuration of MYSQL Server Enterprise version 5.7.
+InSpec profile to validate the secure configuration of Oracle MySQL Enterprise Edition version 5.7, against [CIS](https://www.cisecurity.org/cis-benchmarks/)'s **Oracle MySQL Enterprise Edition 5.7 CIS Benchmark**.
 
-## Description
+## Getting Started  
+It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__.
 
-This InSpec compliance profile is a collection of automated tests for secure configuration of the MYSQL Server Enterprise version 5.7.
+__For the best security of the runner, always install on the runner the _latest version_ of InSpec and supporting Ruby language components.__ 
 
-InSpec is an open-source run-time framework and rule language used to specify compliance, security, and policy requirements for testing any node in your infrastructure.
+Latest versions and installation options are available at the [InSpec](http://inspec.io/) site.
 
-## Requirements
+## Running This Profile
 
-- [ruby](https://www.ruby-lang.org/en/) version 2.4  or greater
-- [InSpec](http://inspec.io/) version 3.x or greater
-    - Install via ruby gem: `gem install inspec`
+    inspec exec https://github.com/mitre/microsoft-windows-2012r2-memberserver-stig-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
 
-## Usage
-InSpec makes it easy to run tests wherever you need. More options listed here: [InSpec cli](http://inspec.io/docs/reference/cli/)
+Runs this profile over winrm to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
+    
+The following is an example of using this command. 
 
-### Run with remote profile:
-You may choose to run the profile via a remote url, this has the advantage of always being up to date.
-The disadvantage is you may wish to modify controls, which is only possible when downloaded.
-Also, the remote profile is unintuitive for passing in attributes, which modify the default values of the profile.
-``` bash
-inspec exec https://github.com/mitre/cis-mysql-server-enterprise-v5.7-baseline.git
-```
+    inspec exec https://github.com/mitre/cis-mysql-server-enterprise-v5.7-baseline/archive/master.tar.gz -t winrm://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:windows-memberserver-results.json
 
-Another option is to download the profile then run it, this allows you to edit specific instructions and view the profile code.
-``` bash
-# Clone Inspec Profile
-$ git clone https://github.com/mitre/cis-mysql-server-enterprise-v5.7-baseline.git
+## Viewing the JSON Results
 
-# Run profile locally (assuming you have not changed directories since cloning)
-# This will display compliance level at the prompt, and generate a JSON file 
-# for export called output.json
-$ inspec exec cis-mysql-server-enterprise-v5.7-baseline --reporter cli json:output.json
+The JSON results output file can be loaded into __[heimdall-lite](https://mitre.github.io/heimdall-lite/)__ for a user-interactive, graphical view of the InSpec results. 
 
-# Run profile with custom settings defined in attributes.yml against the target 
-# server example.com. 
-$ inspec exec cis-mysql-server-enterprise-v5.7-baseline -t ssh://user@password:example.com --attrs attributes.yml --reporter cli json:output.json
+The JSON InSpec results file may also be loaded into a __full heimdall server__, allowing for additional functionality such as to store and compare multiple profile runs.
 
-# Run profile with: custom attributes, ssh keyed into a custom target, and sudo.
-$ inspec exec cis-mysql-server-enterprise-v5.7-baseline -t ssh://user@hostname -i /path/to/key --sudo --attrs attributes.yml --reporter cli json:output.json
-```
+## Authors
+- Alicia Sturtevant
 
+## Special Thanks
 
-## Contributors + Kudos
-
-- Aaron Lippold
 - The MITRE InSpec Team
 
-## License and Author
+## Contributing and Getting Help
+To report a bug or feature request, please open an [issue](https://github.com/mitre/cis-mysql-server-enterprise-v5.7-baseline/issues/new).
 
-### Authors
-- Author:: Alicia Sturtevant
+For other help, please send a message to [inspec@mitre.org](mailto:inspec@mitre.org).
 
-### License  
+To contribute, please review the [contribution guidelines](https://github.com/mitre/docs-mitre-inspec/blob/master/CONTRIBUTING.md).
 
-* This project is licensed under the terms of the Apache license 2.0 (apache-2.0)
+## License 
 
-### NOTICE  
+This project is licensed under the terms of the [Apache 2.0 license](https://github.com/mitre/cis-mysql-server-enterprise-v5.7-baseline/blob/master/LICENSE.md).
 
-© 2018 The MITRE Corporation.  
+### NOTICE
+
+© 2019 The MITRE Corporation.  
 
 Approved for Public Release; Distribution Unlimited. Case Number 18-3678.  
 
-## NOTICE  
-
-MITRE hereby grants express written permission to use, reproduce, distribute, modify, and otherwise leverage this software to the extent permitted by the licensed terms provided in the [LICENSE.md](../LICENSE.md) file included with this project.
+### NOTICE
+MITRE hereby grants express written permission to use, reproduce, distribute, modify, and otherwise leverage this software to the extent permitted by the licensed terms provided in the LICENSE.md file included with this project.
 
 ### NOTICE  
 
@@ -76,6 +60,7 @@ No other use other than that granted to the U. S. Government, or to those acting
 
 For further information, please contact The MITRE Corporation, Contracts Management Office, 7515 Colshire Drive, McLean, VA  22102-7539, (703) 983-6000.  
 
-## NOTICE  
+### NOTICE
 
-CIS Benchmarks are published by the Center for Internet Security (CIS), see: https://www.cisecurity.org/cis-benchmarks/.   
+DISA STIGs are published by DISA IASE, see: https://iase.disa.mil/Pages/privacy_policy.aspx   
+
