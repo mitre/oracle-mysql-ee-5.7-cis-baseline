@@ -1,9 +1,9 @@
-name: cis-mysql-server-enterprise-v5.7-baseline
-title: CIS baseline for Mysql server enterprise edition 5.7
+name: Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline
+title: CIS baseline for Orable MySQL server enterprise edition 5.7
 maintainer: MITRE InSpec Team
 copyright: The MITRE Corporation, 2018
 copyright_email: opensource@mitre.org
-summary: The CIS Mysql Server Enterprise Edition Benchmark InSpec profile.
+summary: The CIS Oracle MySQL Server Enterprise Edition Benchmark InSpec profile.
 license: Apache-2.0
 Description: An InSpec Compliance Profile. 
 version: 0.1.0
