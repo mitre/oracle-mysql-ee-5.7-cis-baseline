@@ -5,6 +5,7 @@ control "4.3" do
   tag "severity": "medium"
   tag "cis_id": "4.3"
   tag "cis_level": 2
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "Perform the following to determine if the recommended state is in place:
   • Ensure --allow-suspicious-udfs is not specified in the the mysqld start up command line.

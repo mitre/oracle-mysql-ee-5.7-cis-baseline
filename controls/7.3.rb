@@ -6,6 +6,7 @@ control "7.3" do
   tag "cis_id": "7.3"
   tag "cis_level": 1
   tag "cis_level": 2
+  tag "nist": ['IA-5(1)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "Profile Applicability": "Level 2 - MySQL RDBMS on Linux"
   tag "audit text": "

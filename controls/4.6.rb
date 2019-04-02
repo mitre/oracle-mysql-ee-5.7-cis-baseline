@@ -7,6 +7,7 @@ control "4.6" do
   tag "severity": "medium"
   tag "cis_id": "4.6"
   tag "cis_level": 1
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW variables LIKE 'have_symlink';

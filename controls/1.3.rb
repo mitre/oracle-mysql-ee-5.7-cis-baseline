@@ -7,6 +7,7 @@ control "1.3" do
   tag "severity": "medium"
   tag "cis_id": "1.3"
   tag "cis_level": 2
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS on Linux"
   tag "audit text": "Execute the following commands to assess this recommendation:
   find /home -name '.mysql_history'

@@ -6,6 +6,7 @@ control "7.5" do
   tag "cis_id": "7.5"
   tag "cis_level": 1
   tag "cis_level": 2
+  tag "nist": ['IA-5(1)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL query to determine if any users have a blank password:

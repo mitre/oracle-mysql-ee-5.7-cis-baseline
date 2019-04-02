@@ -5,6 +5,7 @@ control "1.2" do
   tag "severity": "medium"
   tag "cis_id": "1.2"
   tag "cis_level": 1
+  tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Execute the following command at a terminal prompt to assess this recommendation:
   ps -ef | egrep '^mysql.*$''

@@ -5,6 +5,7 @@ control "6.10" do
   tag "severity": "medium"
   tag "cis_id": "6.10"
   tag "cis_level": 2
+  tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy';
   It must return ALL"

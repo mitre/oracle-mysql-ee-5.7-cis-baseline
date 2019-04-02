@@ -6,6 +6,7 @@ control "3.8" do
   tag "severity": "medium"
   tag "cis_id": "3.8"
   tag "cis_level": 1
+  tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "To assess this recommendation, execute the following SQL statement to discover the Value of plugin_dir:
   show variables where variable_name = 'plugin_dir';

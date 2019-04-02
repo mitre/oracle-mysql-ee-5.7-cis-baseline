@@ -8,6 +8,7 @@ control "3.4" do
   tag "severity": "medium"
   tag "cis_id": "3.4"
   tag "cis_level": 1
+  tag "nist": ['AU-9', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of slow_query_log_file

@@ -5,6 +5,7 @@ control "5.7" do
   tag "severity": "medium" 
   tag "cis_id": "5.7"
   tag "cis_level": 1
+  tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statements to audit this setting:
       SELECT user, host FROM mysql.user WHERE Grant_priv = 'Y'; 

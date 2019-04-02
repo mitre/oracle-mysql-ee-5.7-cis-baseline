@@ -6,6 +6,7 @@ control "4.1" do
   tag "severity": "medium"
   tag "cis_id": "4.1"
   tag "cis_level": 1
+  tag "nist": ['SI-2', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "
   Execute the following SQL statement to identify the MySQL server version:

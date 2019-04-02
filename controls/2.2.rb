@@ -5,6 +5,7 @@ control "2.2" do
   tag "severity": "medium" 
   tag "cis_id": "2.2"
   tag "cis_level": 1
+  tag "nist": ['IA-6', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Check the process or task list if the password is visible.
   Check the shell or command history if the password is visible"

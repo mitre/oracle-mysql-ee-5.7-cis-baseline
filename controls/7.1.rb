@@ -9,6 +9,7 @@ control "7.1" do
   tag "severity": "medium"
   tag "cis_id": "7.1"
   tag "cis_level": 1
+  tag "nist": ['IA-5(1)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "
   Execute the following SQL statement to assess this recommendation:

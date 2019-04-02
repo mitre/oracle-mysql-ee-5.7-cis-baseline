@@ -6,6 +6,7 @@ control "3.9" do
   tag "severity": "medium" 
   tag "cis_id": "3.9"
   tag "cis_level": 1
+  tag "nist": ['AU-9', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "To assess this recommendation, execute the following SQL statement to discover the audit_log_file value:
     show global variables where variable_name='audit_log_file';

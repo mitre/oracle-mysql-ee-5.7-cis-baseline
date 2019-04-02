@@ -9,6 +9,7 @@ control "6.3" do
   tag "severity": "medium"  
   tag "cis_id": "6.3"
   tag "cis_level": 2
+  tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'log_warnings';

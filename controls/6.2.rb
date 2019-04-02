@@ -7,6 +7,7 @@ control "6.2" do
   tag "severity": "medium"  
   tag "cis_id": "6.2"
   tag "cis_level": 1
+  tag "nist": ['AU-9(2)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS in Linux"
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SELECT @@global.log_bin_basename;

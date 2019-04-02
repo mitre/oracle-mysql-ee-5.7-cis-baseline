@@ -7,6 +7,7 @@ control "1.1" do
   tag "severity": "medium"
   tag "cis_id": "1.1"
   tag "cis_level": 1
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "Execute the following steps to assess this recommendation:
   • Discover the datadir by executing the following SQL statement

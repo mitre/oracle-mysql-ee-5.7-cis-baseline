@@ -6,6 +6,7 @@ control "4.9" do
   tag "severity": "medium"
   tag "cis_id": "4.9"
   tag "cis_level": 2
+  tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "To audit for this recommendation execute the following query:
     SHOW VARIABLES LIKE 'sql_mode';

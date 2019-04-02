@@ -5,6 +5,7 @@ control "4.7" do
   tag "severity": "medium" 
   tag "cis_id": "4.7"
   tag "cis_level": 1
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SELECT * FROM information_schema.plugins WHERE PLUGIN_NAME='daemon_memcached'

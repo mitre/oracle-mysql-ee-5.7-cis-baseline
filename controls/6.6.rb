@@ -5,6 +5,7 @@ control "6.6" do
   tag "severity": "medium"  
   tag "cis_id": "6.6"
   tag "cis_level": 1
+  tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     SHOW VARIABLES LIKE '%audit_log_exclude_accounts%';

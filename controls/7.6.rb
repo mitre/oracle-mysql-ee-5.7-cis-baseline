@@ -4,6 +4,7 @@ control "7.6" do
   impact 0.5
   tag "severity": "medium"
   tag "cis_level": 1
+  tag "nist": ['IA-5(1)', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statements to assess this recommendation:

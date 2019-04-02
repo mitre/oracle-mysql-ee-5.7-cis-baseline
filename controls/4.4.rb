@@ -5,6 +5,7 @@ control "4.4" do
   tag "severity": "medium"
   tag "cis_id": "4.4"
   tag "cis_level": 1
+  tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL statement and ensure the Value field is set to OFF: 
       SHOW VARIABLES WHERE Variable_name = 'local_infile';"

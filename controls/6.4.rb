@@ -6,6 +6,7 @@ control "6.4" do
   tag "severity": "medium"  
   tag "cis_id": "6.4"
   tag "cis_level": 1
+  tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "audit text": "
   Perform the following actions to assess this recommendation:

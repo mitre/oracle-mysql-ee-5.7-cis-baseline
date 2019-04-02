@@ -6,6 +6,7 @@ control "7.8" do
   tag "cis_id": "7.8"
   tag "cis_level": 1
   tag "cis_level": 2
+  tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS"
   tag "Profile Applicability": "Level 2 - MySQL RDBMS"
   tag "audit text": "Execute the following SQL query to identify anonymous accounts:

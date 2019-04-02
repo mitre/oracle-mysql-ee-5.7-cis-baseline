@@ -5,7 +5,8 @@ control "2.4" do
   impact 0.5
   tag "severity": "medium"
   tag "cis_id": "2.4"
-  tag "cis_level": 2
+  tag "cis_level": 
+  tag "nist": ['IA-5(2)', 'Rev_4']
   tag "Profile Applicability": "Level 2 - MySQL RDBMS on Linux"
   tag "audit text": "Review all cryptographic material and check to see if any of it is default or is used for other MySQL instances or for purposes other than MySQL"
   tag "fix": "Generate new certificates, keys, and other cryptographic material as needed for each affected MySQL instance"
