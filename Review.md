@@ -1,7 +1,7 @@
 | Check          | Sub-check                                                                         | Who | Completion Date *** | Issue #'s |
 |----------------|-----------------------------------------------------------------------------------|-----|-----------------|-----------|
 |Logical checks| Proper profile directory structure	[1]						|Mo|04/02/2019|*|
-| |JSON output review (e.g., pass/fail on ,<br>hardened, not hardened, edge cases, etc.)|||
+| |JSON output review (e.g., pass/fail on ,<br>hardened, not hardened, edge cases, etc.)|Mo|04/02/2019|#4|
 | |InSpec syntax checker|Mo|04/03/2019|*|
 | |Local commands focused on target not the runner [2]|Mo|04/03/2019|*|
 |Quality checks|Alignment (including tagging) to original<br> standard (i.e. STIG, CIS Benchmark, NIST Tags)|Mo|04/03/2019|#2|
