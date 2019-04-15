@@ -1,5 +1,5 @@
-name: Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline
-title: CIS baseline for Orable MySQL server enterprise edition 5.7
+name: oracle-mysql-ee-5.7-cis-baseline
+title: CIS baseline for Oracle MySQL server enterprise edition 5.7
 maintainer: MITRE InSpec Team
 copyright: The MITRE Corporation, 2018
 copyright_email: opensource@mitre.org
