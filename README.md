@@ -1,4 +1,4 @@
-# Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline
+# oracle-mysql-ee-5.7-cis-baseline
 
 InSpec profile to validate the secure configuration of Oracle MySQL Enterprise Edition version 5.7, against [CIS](https://www.cisecurity.org/cis-benchmarks/)'s **Oracle MySQL Enterprise Edition 5.7 CIS Benchmark**.
 
@@ -11,13 +11,13 @@ Latest versions and installation options are available at the [InSpec](http://in
 
 ## Running This Profile
 
-    inspec exec https://github.com/mitre/Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
+    inspec exec https://github.com/mitre/oracle-mysql-ee-5.7-cis-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
 
 Runs this profile over winrm to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
     
 The following is an example of using this command. 
 
-    inspec exec https://github.com/mitre/Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline/archive/master.tar.gz -t winrm://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline-results.json
+    inspec exec https://github.com/mitre/oracle-mysql-ee-5.7-cis-baseline/archive/master.tar.gz -t winrm://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-mysql-ee-5.7-cis-baseline-results.json
 
 ## Viewing the JSON Results
 
@@ -33,7 +33,7 @@ The JSON InSpec results file may also be loaded into a __full heimdall server__,
 - The MITRE InSpec Team
 
 ## Contributing and Getting Help
-To report a bug or feature request, please open an [issue](https://github.com/mitre/Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline/issues/new).
+To report a bug or feature request, please open an [issue](https://github.com/mitre/oracle-mysql-ee-5.7-cis-baseline/issues/new).
 
 For other help, please send a message to [inspec@mitre.org](mailto:inspec@mitre.org).
 
@@ -41,7 +41,7 @@ To contribute, please review the [contribution guidelines](https://github.com/mi
 
 ## License 
 
-This project is licensed under the terms of the [Apache 2.0 license](https://github.com/mitre/Oracle-MySQL-Enterprise-Edition-5.7-cis-baseline/blob/master/LICENSE.md).
+This project is licensed under the terms of the [Apache 2.0 license](https://github.com/mitre/oracle-mysql-ee-5.7-cis-baseline/blob/master/LICENSE.md).
 
 ### NOTICE
 
