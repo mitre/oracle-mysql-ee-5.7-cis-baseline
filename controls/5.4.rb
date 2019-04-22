@@ -1,13 +1,13 @@
-control "5.4" do
+control '5.4' do
   title "Ensure 'super_priv' Is Not Set to 'Y' for Non-Administrative Users (Scored)"
-  desc  "The SUPER privilege found in the mysql.user table governs the use of a variety of MySQL features. 
+  desc  "The SUPER privilege found in the mysql.user table governs the use of a variety of MySQL features.
   These features include, CHANGE MASTER TO, KILL, mysql admin kill option, PURGE BINARY LOGS, SET GLOBAL, mysqladmin debug option, logging control, and more."
   impact 0.5
-  tag "severity": "medium" 
-  tag "cis_id": "5.4"
+  tag "severity": 'medium'
+  tag "cis_id": '5.4'
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
-  tag "Profile Applicability": "Level 1 - MySQL RDBMS"
+  tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL statement to audit this setting:
     select user, host from mysql.user where Super_priv = 'Y';
   Ensure only administrative users are returned in the result set."
@@ -15,11 +15,10 @@ control "5.4" do
   1. Enumerate the non-administrative users found in the result set of the audit procedure
   2. For each user, issue the following SQL statement (replace '<user>' with the non- administrative user:
     REVOKE SUPER ON *.* FROM '<user>';"
-  query = %(select user from mysql.user where Super_priv = 'Y';)
- 
-  sql_session = mysql_session(attribute('user'),attribute('password'),attribute('host'),attribute('port'))
-  mysql_user_super_priv = sql_session.query(query).stdout.strip.split("\n") 
+  query = %{select user from mysql.user where Super_priv = 'Y';}
 
+  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  mysql_user_super_priv = sql_session.query(query).stdout.strip.split("\n")
 
   if !mysql_user_super_priv.empty?
     mysql_user_super_priv.each do |user|

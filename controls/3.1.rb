@@ -1,12 +1,12 @@
-control "3.1" do
+control '3.1' do
   title "Ensure 'datadir' Has Appropriate Permissions and Ownership (Scored)"
-  desc  "The data directory is the location of the MySQL databases."
+  desc  'The data directory is the location of the MySQL databases.'
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "3.1"
+  tag "severity": 'medium'
+  tag "cis_id": '3.1'
   tag "cis_level": 1
   tag "nist": ['AC-3', 'Rev_4']
-  tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
+  tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of datadir
       show variables where variable_name = 'datadir';
@@ -18,12 +18,12 @@ control "3.1" do
       chmod 700 <datadir>
       chown mysql:mysql <datadir>"
 
-  query = %(select @@datadir;)
-  sql_session = mysql_session(attribute('user'),attribute('password'),attribute('host'),attribute('port'))
-           
+  query = %{select @@datadir;}
+  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+
   datadir = sql_session.query(query).stdout.strip.split
 
-  describe directory("#{datadir}") do
+  describe directory(datadir.to_s) do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
