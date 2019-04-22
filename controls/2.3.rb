@@ -27,7 +27,6 @@ control "2.3" do
     end
   else
     impact 0.0
-    desc 'There are no mysql database users, therefore this control is not applicable'
     describe 'There are no mysql database users, therefore this control is not applicable' do
       skip 'There are no mysql database users, therefore this control is not applicable'
     end

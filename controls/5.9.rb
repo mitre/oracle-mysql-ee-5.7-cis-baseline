@@ -55,7 +55,6 @@ control "5.9" do
   end
   if mysql_user_privs.empty?
     impact 0.0
-    desc 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable'
     describe 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable' do
       skip 'There are no mysql users allowed to modify or create data structures, therefore this control is not applicable'
     end

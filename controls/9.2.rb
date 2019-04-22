@@ -26,7 +26,6 @@ control "9.2" do
     end
   else
     impact 0.0
-    desc 'There is no mysql server slave configured, therfore this control is not applicable'
     describe 'There is no mysql server slave configured, therfore this control is not applicable' do
       skip 'There is no mysql server slave configured, therfore this control is not applicable'
     end

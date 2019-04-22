@@ -47,7 +47,6 @@ control "8.2" do
     end
   end
   if remote_users.empty?
-    desc 'There are no mysql remote users, therefore this control is not applicable'
     impact 0.0
     describe 'There are no mysql remote users, therefore this control is not applicable' do
       skip 'There are no mysql remote users, therefore this control is not applicable'

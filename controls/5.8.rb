@@ -31,7 +31,6 @@ control "5.8" do
   end
   if mysql_user_repl_slave_priv.empty?
     impact 0.0
-    desc 'There are no mysql users with repl_slave_priv allowed, therefore this control is not applicable'
     describe 'There are no mysql users with repl_slave_priv allowed, therefore this control is not applicable' do
       skip 'There are no mysql users with repl_slave_priv allowed, therefore this control is not applicable'
     end

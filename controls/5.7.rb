@@ -41,7 +41,6 @@ control "5.7" do
 
   if mysql_user_privs.empty? && mysql_user_db_privs.empty?
     impact 0.0
-    desc 'There are no mysql users configured with grant_priv access, therefore this control is not applicable'
     describe 'There are no mysql users configured with grant_priv access, therefore this control is not applicable' do
       skip 'There are no mysql users configured with grant_priv access, therefore this control is not applicable'
     end
