@@ -6,7 +6,7 @@ control "3.7" do
   tag "severity": "medium"
   tag "cis_id": "3.7"
   tag "cis_level": 1
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": ['AC-3', 'Rev_4']
   tag "Profile Applicability": "Level 1 - MySQL RDBMS on Linux"
   tag "audit text": "To assess this recommendation, locate the SSL key in use by executing the following SQL statement to get the Value of ssl_key:
   show variables where variable_name = 'ssl_key';
