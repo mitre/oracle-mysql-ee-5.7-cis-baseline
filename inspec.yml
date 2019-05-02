@@ -15,16 +15,16 @@ attributes:
   - name: user
     description: 'username MSSQL DB Server'
     type: string
-    default: 'root'
+    default: 'test'
 
   - name: password
     description: 'password MSSQL DB Server'
     type: string
-    default: 'P@ssw0rd1'
+    default: 'test1234'
 
   - name: host
     description: 'hostname MSSQL DB Server'
-    default: 'localhost'
+    default: 'test.cjwekmnpixnv.us-east-2.rds.amazonaws.com'
 
   - name: port
     description: 'port MSSQL DB Server'
