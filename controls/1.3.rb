@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '1.3' do
   title 'Disable MySQL Command History (Scored)'
   desc  "On Linux/UNIX, the MySQL client logs statements executed interactively to a history
@@ -7,7 +9,7 @@ control '1.3' do
   tag "severity": 'medium'
   tag "cis_id": '1.3'
   tag "cis_level": 2
-  tag "nist": ['CM-7', 'Rev_4']
+  tag "nist": %w[CM-7 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
   tag "audit text": "Execute the following commands to assess this recommendation:
   find /home -name '.mysql_history'
@@ -21,11 +23,13 @@ control '1.3' do
   "
   tag "Default Value": 'By default, the MySQL command history file is located in $HOME/.mysql_history'
 
-  history_file = command("find / -name '.mysql_history'").stdout.strip.split("\n")
+  history_files = command("find / -name '.mysql_history'").stdout.strip.split("\n")
 
-  describe "The MySql history file: #{history_file}" do
-    subject { file(history_file.to_s) }
-    its('link_path') { should eq '/dev/null' }
+  history_files.each do |history_file|
+    describe "The MySql history file: #{history_file}" do
+      subject { file(history_file.to_s) }
+      its('link_path') { should eq '/dev/null' }
+    end
   end
   only_if { os.linux? }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.2' do
   title 'Ensure Log Files Are Stored on a Non-System Partition (Scored)'
   desc  "MySQL log files can be set in the MySQL configuration to exist anywhere on the filesystem.
@@ -16,9 +18,9 @@ control '6.2' do
   1. Open the MySQL configuration file (my.cnf)
   2. Locate the log-bin entry and set it to a file not on root ('/'), /var, or /usr"
 
-  query = %{select @@global.log_bin_basename;}
+  query = %(select @@global.log_bin_basename;)
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   global_log_bin_basename = sql_session.query(query).stdout.strip.split
 

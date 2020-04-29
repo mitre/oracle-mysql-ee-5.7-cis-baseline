@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.12' do
   title "Make sure the audit plugin can't be unloaded (Scored)"
   desc  'Set audit_log to FORCE_PLUS_PERMANENT'
@@ -5,7 +7,7 @@ control '6.12' do
   tag "severity": 'medium'
   tag "cis_id": '6.12'
   tag "cis_level": 1
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     SELECT LOAD_OPTION FROM information_schema.plugins WHERE PLUGIN_NAME='audit_log';
@@ -16,8 +18,8 @@ control '6.12' do
   audit_log = 'FORCE_PLUS_PERMANENT'"
   tag "Default Value": 'ON'
 
-  query = %{SELECT LOAD_OPTION FROM information_schema.plugins WHERE PLUGIN_NAME='audit_log';}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT LOAD_OPTION FROM information_schema.plugins WHERE PLUGIN_NAME='audit_log';)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   audit_log_plugin = sql_session.query(query).stdout.strip
 

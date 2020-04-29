@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '8.1' do
   title "Ensure 'have_ssl' Is Set to 'YES' (Scored)"
   desc  'All network traffic must use SSL/TLS when traveling over untrusted networks.'
@@ -15,8 +17,8 @@ control '8.1' do
   tag "fix": 'Follow the procedures as documented in the MySQL 5.6 Reference Manual to setup SSL.'
   tag "Default Value": 'DISABLED'
 
-  query = %{SELECT @@have_ssl;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT @@have_ssl;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   have_ssl = sql_session.query(query).stdout.strip
 

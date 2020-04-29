@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.4' do
   title "Ensure 'log-raw' Is Set to 'OFF' (Scored)"
   desc  "The log-raw MySQL option determines whether passwords are rewritten by the server so as not to appear in log files as plain text.
@@ -6,7 +8,7 @@ control '6.4' do
   tag "severity": 'medium'
   tag "cis_id": '6.4'
   tag "cis_level": 1
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
   Perform the following actions to assess this recommendation:

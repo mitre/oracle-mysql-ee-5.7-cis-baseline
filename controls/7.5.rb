@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.5' do
   title 'Ensure Passwords Are Set for All MySQL Accounts (Scored)'
   desc  'Blank passwords allow a user to login without using a password.'
@@ -27,7 +29,7 @@ control '7.5' do
         AND (LENGTH(authentication_string) = 0
         OR authentication_string IS NULL))
         OR (plugin='sha256_password' AND LENGTH(authentication_string) = 0);}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   users_with_blank_passwords = sql_session.query(query).stdout.strip
 
   describe 'The MySQL users with blank passwords' do

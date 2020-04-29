@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.4' do
   title "Ensure 'sql_mode' Contains 'NO_AUTO_CREATE_USER' (Scored)"
   desc  "NO_AUTO_CREATE_USER is an option for sql_mode that prevents a GRANT statement from
@@ -7,7 +9,7 @@ control '7.4' do
   tag "cis_id": '7.4'
   tag "cis_level": 1
   tag "cis_level": 2
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
@@ -24,9 +26,9 @@ control '7.4' do
   2. Find the sql_mode setting in the [mysqld] area
   3. Add the NO_AUTO_CREATE_USER to the sql_mode setting"
 
-  global_query = %{SELECT @@global.sql_mode;}
-  session_query = %{SELECT @@session.sql_mode;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  global_query = %(SELECT @@global.sql_mode;)
+  session_query = %(SELECT @@session.sql_mode;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   global_sql_mode = sql_session.query(global_query).stdout.strip
   session_sql_mode = sql_session.query(session_query).stdout.strip

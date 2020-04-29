@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '1.1' do
   title '1.1 Place Databases on Non-System Partitions (Scored)'
   desc  "It is generally accepted that host operating systems should include different filesystem partitions for different purposes.
@@ -7,7 +9,7 @@ control '1.1' do
   tag "severity": 'medium'
   tag "cis_id": '1.1'
   tag "cis_level": 1
-  tag "nist": ['SC-2', 'Rev_4']
+  tag "nist": %w[SC-2 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Execute the following steps to assess this recommendation:
   • Discover the datadir by executing the following SQL statement
@@ -30,7 +32,7 @@ control '1.1' do
 "
   tag "Default Value": 'Not Applicable'
 
-  query = %{select @@datadir;}
+  query = %(select @@datadir;)
 
   sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
 

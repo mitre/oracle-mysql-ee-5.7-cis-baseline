@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '5.9' do
   title 'Ensure DML/DDL Grants Are Limited to Specific Databases and Users (Scored)'
   desc  "DML/DDL includes the set of privileges used to modify or create data structures.
@@ -6,7 +8,7 @@ control '5.9' do
   tag "severity": 'medium'
   tag "cis_id": '5.9'
   tag "cis_level": 1
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
   Execute the following SQL statement to audit this setting:
@@ -33,7 +35,7 @@ control '5.9' do
      REVOKE CREATE ON <host>.<database> FROM <user>;
      REVOKE DROP ON <host>.<database> FROM <user>;
      REVOKE ALTER ON <host>.<database> FROM <user>;"
-  query = %{SELECT User
+  query = %(SELECT User
     FROM mysql.db
     WHERE Select_priv='Y'
       OR Insert_priv='Y'
@@ -41,15 +43,15 @@ control '5.9' do
       OR Delete_priv='Y'
       OR Create_priv='Y'
       OR Drop_priv='Y'
-      OR Alter_priv='Y';}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+      OR Alter_priv='Y';)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   mysql_user_privs = sql_session.query(query).stdout.strip.split("\n")
 
-  if !mysql_user_privs.empty?
+  unless mysql_user_privs.empty?
     mysql_user_privs.each do |user|
       describe "The mysql user: #{user} with privileges to modify or create data structures" do
         subject { user }
-        it { should be_in attribute('mysql_users_allowed_modify_or_create') }
+        it { should be_in input('mysql_users_allowed_modify_or_create') }
       end
     end
   end

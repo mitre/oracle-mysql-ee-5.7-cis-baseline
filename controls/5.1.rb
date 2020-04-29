@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '5.1' do
   title 'Ensure Only Administrative Users Have Full Database Access (Scored)'
   desc  "The mysql.user and mysql.db tables list a variety of privileges that can be granted (or denied) to MySQL users.
@@ -7,7 +9,7 @@ control '5.1' do
   tag "severity": 'medium'
   tag "cis_id": '5.1'
   tag "cis_level": 1
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
   Execute the following SQL statement(s) to assess this recommendation:
@@ -34,23 +36,23 @@ control '5.1' do
     AND ((Select_priv = 'Y') OR (Insert_priv = 'Y') OR (Update_priv = 'Y') OR (Delete_priv = 'Y') OR (Create_priv = 'Y')
     OR (Drop_priv = 'Y'));
     }
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   mysql_user_privs = sql_session.query(mysql_user_query).stdout.strip.split("\n")
   mysql_user_db_privs = sql_session.query(mysql_user_db_query).stdout.strip.split("\n")
 
-  if !mysql_user_privs.empty?
+  unless mysql_user_privs.empty?
     mysql_user_privs.each do |user|
       describe "The mysql user: #{user} with privilege access in the mysql.user table" do
         subject { user }
-        it { should be_in attribute('mysql_administrative_users') }
+        it { should be_in input('mysql_administrative_users') }
       end
     end
   end
-  if !mysql_user_db_privs.empty?
+  unless mysql_user_db_privs.empty?
     mysql_user_db_privs.each do |user|
       describe "The mysql user: #{user} with privilege access in the mysql.db table" do
         subject { user }
-        it { should be_in attribute('mysql_administrative_users') }
+        it { should be_in input('mysql_administrative_users') }
       end
     end
   end

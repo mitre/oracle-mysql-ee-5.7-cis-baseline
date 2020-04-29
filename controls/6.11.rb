@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.11' do
   title 'Set audit_log_strategy to SYNCHRONOUS or SEMISYNCRONOUS (Scored)'
   desc  'The audit_log_strategy must be set to SYNCHRONOUS or SEMISYNCHRONOUS'
@@ -5,7 +7,7 @@ control '6.11' do
   tag "severity": 'medium'
   tag "cis_id": '6.11'
   tag "cis_level": 2
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "To assess this recommendation, execute the following SQL statement:
     SHOW GLOBAL VARIABLES LIKE 'audit_log_strategy';
@@ -17,8 +19,8 @@ control '6.11' do
   "
   tag "Default Value": 'ASYNCHRONOUS'
 
-  query = %{SHOW GLOBAL VARIABLES LIKE 'audit_log_strategy';}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SHOW GLOBAL VARIABLES LIKE 'audit_log_strategy';)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   audit_log_strategy = sql_session.query(query).stdout.strip
 

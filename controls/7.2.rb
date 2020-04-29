@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.2' do
   title "Ensure 'secure_auth' is set to 'ON' (Scored)"
   desc  'This option dictates whether the server will deny connections by clients that attempt to use accounts that have their password stored in the mysql_old_password format.'
@@ -6,7 +8,7 @@ control '7.2' do
   tag "cis_id": '7.2'
   tag "cis_level": 1
   tag "cis_level": 2
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "
@@ -18,8 +20,8 @@ control '7.2' do
   "
   tag "Default Value": 'Before MySQL 5.6.5, this option is disabled by default. As of MySQL 5.6.5, it is enabled by default; to disable it, use --skip-secure-auth.'
 
-  query = %{SELECT @@secure_auth;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT @@secure_auth;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   secure_auth = sql_session.query(query).stdout.strip
 

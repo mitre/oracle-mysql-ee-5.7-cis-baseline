@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '3.9' do
   title "Ensure 'audit_log_file' has Appropriate Permissions and Ownership (Scored)"
   desc  "MySQL can operate using a variety of log files, each used for different purposes. These are the binary log, error log, slow query log, relay log, audit log and general log.
@@ -6,7 +8,7 @@ control '3.9' do
   tag "severity": 'medium'
   tag "cis_id": '3.9'
   tag "cis_level": 1
-  tag "nist": ['AU-9', 'Rev_4']
+  tag "nist": %w[AU-9 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "To assess this recommendation, execute the following SQL statement to discover the audit_log_file value:
     show global variables where variable_name='audit_log_file';
@@ -17,17 +19,21 @@ control '3.9' do
     chmod 660 <audit_log_file>
     chown mysql:mysql <audit_log_file>"
 
-  query = %{select @@audit_log_file;}
+  query = %(select @@audit_json_log_file;)
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  audit_log_file = sql_session.query(query).stdout.strip.split
+  audit_log_file = sql_session.query(query).stdout.strip.split.first
 
-  describe directory(audit_log_file.to_s) do
+  only_if("#{audit_log_file} file exist.") do
+    file(audit_log_file).exist?
+  end
+
+  describe file(audit_log_file.to_s) do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
-    its('mode') { should be <= 0660 }
+    its('mode') { should be <= 0o660 }
   end
   only_if { os.linux? }
 end

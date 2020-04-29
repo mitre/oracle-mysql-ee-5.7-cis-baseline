@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.6' do
   title 'Ensure Password Policy Is in Place (Scored)'
   desc  'Password complexity includes password characteristics such as length, case, length, and character sets.'
@@ -39,16 +41,16 @@ control '7.6' do
 
   And change passwords for users which have passwords which are identical to their username."
 
-  validate_password_length_query = %{SELECT @@validate_password_length}
-  validate_password_mixed_case_count_query = %{SELECT @@validate_password_mixed_case_count}
-  validate_password_number_count_query = %{SELECT @@validate_password_number_count}
-  validate_password_special_char_count_query = %{SELECT @@validate_password_special_char_count}
-  validate_password_policy_query = %{SELECT @@validate_password_policy}
-  validate_password_check_user_name_query = %{SELECT @@validate_password_check_user_name}
+  validate_password_length_query = %(SELECT @@validate_password_length)
+  validate_password_mixed_case_count_query = %(SELECT @@validate_password_mixed_case_count)
+  validate_password_number_count_query = %(SELECT @@validate_password_number_count)
+  validate_password_special_char_count_query = %(SELECT @@validate_password_special_char_count)
+  validate_password_policy_query = %(SELECT @@validate_password_policy)
+  validate_password_check_user_name_query = %(SELECT @@validate_password_check_user_name)
   users_wih_username_equal_to_password_query = %{SELECT User,authentication_string,Host FROM mysql.user
     WHERE authentication_string=CONCAT('*', UPPER(SHA1(UNHEX(SHA1(user)))));}
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   validate_password_length = sql_session.query(validate_password_length_query).stdout.strip
   validate_password_mixed_case_count = sql_session.query(validate_password_mixed_case_count_query).stdout.strip

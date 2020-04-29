@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '5.8' do
   title "Ensure 'repl_slave_priv' Is Not Set to 'Y' for Non-Slave Users (Scored)"
   desc  "The REPLICATION SLAVE privilege governs whether a given user
@@ -6,7 +8,7 @@ control '5.8' do
   tag "severity": 'medium'
   tag "cis_id": '5.8'
   tag "cis_level": 1
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL statement to audit this setting:
       SELECT user, host FROM mysql.user WHERE Repl_slave_priv = 'Y';
@@ -17,15 +19,15 @@ control '5.8' do
     REVOKE REPLICATION SLAVE ON *.* FROM <user>;
   Use the REVOKE statement to remove the SUPER privilege from users who shouldn't have it."
 
-  query = %{select user from mysql.user where Repl_slave_priv = 'Y';}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(select user from mysql.user where Repl_slave_priv = 'Y';)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   mysql_user_repl_slave_priv = sql_session.query(query).stdout.strip.split("\n")
 
-  if !mysql_user_repl_slave_priv.empty?
+  unless mysql_user_repl_slave_priv.empty?
     mysql_user_repl_slave_priv.each do |user|
       describe "The mysql user: #{user} with repl_slave_priv" do
         subject { user }
-        it { should be_in attribute('mysql_administrative_users') }
+        it { should be_in input('mysql_administrative_users') }
       end
     end
   end

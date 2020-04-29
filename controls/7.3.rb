@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.3' do
   title 'Ensure Passwords Are Not Stored in the Global Configuration (Scored)'
   desc  'The [client] section of the MySQL configuration file allows setting a user and password to be used. Verify the password option is not used in the global configuration file (my.cnf).'

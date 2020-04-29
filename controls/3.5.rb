@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '3.5' do
   title "Ensure 'relay_log_basename' Files Have Appropriate Permissions and Ownership (Scored)"
   desc  "MySQL can operate using a variety of log files, each used for different purposes.
@@ -8,7 +10,7 @@ control '3.5' do
   tag "severity": 'medium'
   tag "cis_id": '3.5'
   tag "cis_level": 1
-  tag "nist": ['AU-9', 'Rev_4']
+  tag "nist": %w[AU-9 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of relay_log_basename
@@ -22,17 +24,21 @@ control '3.5' do
       chmod 660 <log file>
       chown mysql:mysql <log file>"
 
-  query = %{select @@relay_log_basename;}
+  query = %(select @@relay_log_basename;)
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  relay_log_basename = sql_session.query(query).stdout.strip.split
+  relay_log_basename = sql_session.query(query).stdout.strip.split.first
+
+  only_if("#{relay_log_basename} directory exist.") do
+    directory(relay_log_basename).exist?
+  end
 
   describe directory(relay_log_basename.to_s) do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
-    its('mode') { should be <= 0660 }
+    its('mode') { should be <= 0o660 }
   end
   only_if { os.linux? }
 end

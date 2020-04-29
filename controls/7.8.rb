@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.8' do
   title 'Ensure No Anonymous Accounts Exist (Scored)'
   desc  "Anonymous accounts are users with empty usernames (''). Anonymous accounts have no passwords, so anyone can use them to connect to the MySQL server."
@@ -6,7 +8,7 @@ control '7.8' do
   tag "cis_id": '7.8'
   tag "cis_level": 1
   tag "cis_level": 2
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL query to identify anonymous accounts:
@@ -19,8 +21,8 @@ control '7.8' do
   tag "Default Value": "Using the standard installation script, mysql_install_db, it will create two anonymous accounts:
   one for the host 'localhost' and the other for the network interface's IP address."
 
-  query = %{SELECT user,host FROM mysql.user WHERE user = '';}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT user,host FROM mysql.user WHERE user = '';)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   anonymous_accounts = sql_session.query(query).stdout.strip
 

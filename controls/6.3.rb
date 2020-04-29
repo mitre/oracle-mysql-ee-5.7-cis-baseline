@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.3' do
   title "Ensure 'log_warnings' Is Set to '2' (Scored)"
   desc  "The log_warnings system variable, enabled by default, provides additional information to the MySQL log.
@@ -9,7 +11,7 @@ control '6.3' do
   tag "severity": 'medium'
   tag "cis_id": '6.3'
   tag "cis_level": 2
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'log_warnings';
@@ -20,8 +22,8 @@ control '6.3' do
     log-warnings = 2"
   tag "Default Value": 'The option is enabled (1) by default.'
 
-  query = %{SELECT @@log_warnings;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT @@log_warnings;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   log_warnings = sql_session.query(query).stdout.strip
 

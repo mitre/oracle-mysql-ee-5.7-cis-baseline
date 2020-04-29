@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.10' do
   title 'Ensure audit_log_statement_policy is set to ALL (Scored)'
   desc  'This setting controls whether statements are written to the audit log'
@@ -5,7 +7,7 @@ control '6.10' do
   tag "severity": 'medium'
   tag "cis_id": '6.10'
   tag "cis_level": 2
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy';
   It must return ALL"
@@ -13,8 +15,8 @@ control '6.10' do
   audit_log_statement_policy='ALL'"
   tag "Default Value": 'ALL'
 
-  query = %{select @@log_error;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(select @@log_error;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   log_error = sql_session.query(query).stdout.strip.split
 

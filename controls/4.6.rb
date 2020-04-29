@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '4.6' do
   title "Ensure '--skip-symbolic-links' Is Enabled (Scored)"
   desc  "The symbolic-links and skip-symbolic-links options for MySQL determine whether symbolic link support is available.
@@ -7,7 +9,7 @@ control '4.6' do
   tag "severity": 'medium'
   tag "cis_id": '4.6'
   tag "cis_level": 1
-  tag "nist": ['CM-7', 'Rev_4']
+  tag "nist": %w[CM-7 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW variables LIKE 'have_symlink';
@@ -15,11 +17,24 @@ control '4.6' do
   tag "fix": "Perform the following actions to remediate this setting:
   • Open the MySQL configuration file (my.cnf)
   • Locate skip_symbolic_links in the configuration
-  • Set the skip_symbolic_links to YES
+  • Set the skip_symbolic_links to YES or 1
   NOTE: If skip_symbolic_links does not exist, add it to the configuration file in the mysqld section.
   "
 
-  describe mysql_conf do
-    its('skip_symbolic_links') { should cmp 'YES' }
+  query = %(select @@have_symlink;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
+  have_symlink = sql_session.query(query).stdout.strip
+  describe 'The MySQL have_symlink setting' do
+    subject { have_symlink }
+    it { should cmp 'DISABLED' }
+  end
+
+  describe.one do
+    describe mysql_conf.params('mysqld') do
+      its('skip_symbolic_links') { should eq '1' }
+    end
+    describe mysql_conf.params('mysqld') do
+      its('skip_symbolic_links') { should eq 'YES' }
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '9.3' do
   title "Ensure 'master_info_repository' Is Set to 'TABLE' (Scored)"
   desc  "The master_info_repository setting determines to where a slave logs master status and connection information.
@@ -6,7 +8,7 @@ control '9.3' do
   tag "severity": 'medium'
   tag "cis_id": '9.3'
   tag "cis_level": 2
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'master_info_repository';
@@ -19,7 +21,7 @@ control '9.3' do
   NOTE: If master_info_repository does not exist, add it to the configuration file."
   tag "Default Value": 'FILE'
   query = 'select @@master_info_repository'
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   master_info_repository = sql_session.query(query).stdout.strip
   describe 'The master_info_repository' do
     subject { master_info_repository }

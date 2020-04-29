@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '2.4' do
   title 'Do Not Use Default or Shared Cryptographic Material (Not Scored)'
   desc  "The cryptographic material used by MySQL, such as digital certificates and encryption keys, should be used only for MySQL and only for one instance.

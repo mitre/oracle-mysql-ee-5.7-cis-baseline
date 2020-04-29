@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '3.4' do
   title "Ensure 'slow_query_log' Has Appropriate Permissions and Ownership (Scored)"
   desc  "MySQL can operate using a variety of log files, each used for different purposes.
@@ -8,7 +10,7 @@ control '3.4' do
   tag "severity": 'medium'
   tag "cis_id": '3.4'
   tag "cis_level": 1
-  tag "nist": ['AU-9', 'Rev_4']
+  tag "nist": %w[AU-9 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of slow_query_log_file
@@ -22,17 +24,21 @@ control '3.4' do
     chmod 660 <log file>
     chown mysql:mysql <log file>"
 
-  query = %{select @@slow_query_log_file;}
+  query = %(select @@slow_query_log_file;)
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  slow_query_log_file = sql_session.query(query).stdout.strip.split
+  slow_query_log_file = sql_session.query(query).stdout.strip.split.first
 
-  describe directory(slow_query_log_file.to_s) do
+  only_if("#{slow_query_log_file} file exist.") do
+    file(slow_query_log_file).exist?
+  end
+
+  describe file(slow_query_log_file.to_s) do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
-    its('mode') { should be <= 0660 }
+    its('mode') { should be <= 0o660 }
   end
   only_if { os.linux? }
 end

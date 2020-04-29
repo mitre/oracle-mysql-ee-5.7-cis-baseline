@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '1.2' do
   title 'Use Dedicated Least Privileged Account for MySQL Daemon/Service (Scored)'
   desc  'As with any service installed on a host, it can be provided with its own user context. Providing a dedicated user to the service provides the ability to precisely constrain the service within the larger host context.'
@@ -5,7 +7,7 @@ control '1.2' do
   tag "severity": 'medium'
   tag "cis_id": '1.2'
   tag "cis_level": 1
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Execute the following command at a terminal prompt to assess this recommendation:
   ps -ef | egrep '^mysql.*$''

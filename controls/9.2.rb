@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '9.2' do
   title "Ensure 'MASTER_SSL_VERIFY_SERVER_CERT' Is Set to 'YES' or '1' (Scored)"
   desc  "In the MySQL slave context the setting MASTER_SSL_VERIFY_SERVER_CERT indicates whether the slave should verify the master's certificate.
@@ -6,7 +8,7 @@ control '9.2' do
   tag "severity": 'medium'
   tag "cis_id": '9.2'
   tag "cis_level": 1
-  tag "nist": ['SC-23', 'Rev_4']
+  tag "nist": %w[SC-23 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "To assess this recommendation, issue the following statement:
   select ssl_verify_server_cert from mysql.slave_master_info;
@@ -17,9 +19,9 @@ control '9.2' do
               START SLAVE; -- required if you want to restart replication"
 
   query = 'select ssl_verify_server_cert from mysql.slave_master_info;'
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   master_ssl_verify_server_cert = sql_session.query(query).stdout.strip
-  if attribute('is_mysql_server_slave_configured')
+  if input('is_mysql_server_slave_configured')
     describe 'The MASTER_SSL_VERIFY_SERVER_CERT' do
       subject { master_ssl_verify_server_cert }
       it { should cmp 1 }

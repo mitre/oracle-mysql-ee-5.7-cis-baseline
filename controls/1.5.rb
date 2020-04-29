@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '1.5' do
   title 'Disable Interactive Login (Scored)'
   desc  'When created, the MySQL user may have interactive access to the operating system, which means that the MySQL user could login to the host as any other user would'
@@ -5,7 +7,7 @@ control '1.5' do
   tag "severity": 'medium'
   tag "cis_id": '1.5'
   tag "cis_level": 2
-  tag "nist": ['AC-6', 'Rev_4']
+  tag "nist": %w[AC-6 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
   tag "audit text": "Execute the following command to assess this recommendation
   getent passwd mysql | egrep '^.*[\/bin\/false|\/sbin\/nologin]$''

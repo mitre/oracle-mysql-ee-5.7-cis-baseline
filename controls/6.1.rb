@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '6.1' do
   title "Ensure 'log_error' Is Not Empty (Scored)"
   desc  "The error log contains information about events such as mysqld starting and stopping, when a table needs to be checked or repaired, and,
@@ -6,7 +8,7 @@ control '6.1' do
   tag "severity": 'medium'
   tag "cis_id": '6.1'
   tag "cis_level": 1
-  tag "nist": ['AU-2', 'Rev_4']
+  tag "nist": %w[AU-2 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
   Execute the following SQL statement to audit this setting:
@@ -16,8 +18,8 @@ control '6.1' do
   1. Open the MySQL configuration file (my.cnf or my.ini)
   2. Set the log-error option to the path for the error log"
 
-  query = %{select @@log_error;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(select @@log_error;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   log_error = sql_session.query(query).stdout.strip.split
 

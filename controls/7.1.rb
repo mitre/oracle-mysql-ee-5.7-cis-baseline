@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '7.1' do
   title "Ensure 'old_passwords' Is Not Set to '1' (Scored)"
   desc  "This variable controls the password hashing method used by the PASSWORD() function and for the IDENTIFIED BY clause of the CREATE USER and GRANT statements.
@@ -20,8 +22,8 @@ control '7.1' do
   • http://dev.mysql.com/doc/refman/5.6/en/sha256-authentication-plugin.html"
   tag "Default Value": '0'
 
-  query = %{SELECT @@old_passwords;}
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  query = %(SELECT @@old_passwords;)
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
   old_passwords = sql_session.query(query).stdout.strip
 

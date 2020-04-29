@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control '3.7' do
   title 'Ensure SSL Key Files Have Appropriate Permissions and Ownership (Scored)'
   desc  "When configured to use SSL/TLS, MySQL relies on key files, which are stored on the host's filesystem.
@@ -6,7 +8,7 @@ control '3.7' do
   tag "severity": 'medium'
   tag "cis_id": '3.7'
   tag "cis_level": 1
-  tag "nist": ['AC-3', 'Rev_4']
+  tag "nist": %w[AC-3 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "To assess this recommendation, locate the SSL key in use by executing the following SQL statement to get the Value of ssl_key:
   show variables where variable_name = 'ssl_key';
@@ -17,17 +19,21 @@ control '3.7' do
     chown mysql:mysql <ssl_key Value>
     chmod 400 <ssl_key Value>"
 
-  query = %{select @@ssl_key;}
+  query = %(select @@ssl_key;)
 
-  sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  ssl_key = sql_session.query(query).stdout.strip.split
+  ssl_key = sql_session.query(query).stdout.strip.split.first
 
-  describe directory(ssl_key.to_s) do
+  only_if("#{ssl_key} file exist.") do
+    file(ssl_key).exist?
+  end
+
+  describe file(ssl_key.to_s) do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
-    its('mode') { should be <= 0400 }
+    its('mode') { should be <= 0o400 }
   end
   only_if { os.linux? }
 end

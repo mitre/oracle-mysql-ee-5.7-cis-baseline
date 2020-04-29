@@ -3,7 +3,7 @@
 *.rbc
 
 !Gemfile.lock
-.attribute.yml
+.input.yml
 
 /.config
 /coverage/
