@@ -9,7 +9,7 @@ control '6.2' do
   tag "cis_level": 1
   tag "nist": ['AU-9(2)', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS in Linux'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SELECT @@global.log_bin_basename;
   Ensure the value returned does not indicate root ('/'), /var, or /usr."
   tag "fix": "Perform the following actions to remediate this setting:

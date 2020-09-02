@@ -9,7 +9,7 @@ control '7.5' do
   tag "nist": ['IA-5(1)', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL query to determine if any users have a blank password:
+  tag "check": "Execute the following SQL query to determine if any users have a blank password:
       SELECT User,host
       FROM mysql.user
       WHERE (plugin IN('mysql_native_password', 'mysql_old_password')

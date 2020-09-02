@@ -7,7 +7,7 @@ control '4.5' do
   tag "cis_level": 1
   tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Perform the following to determine if the recommended state is in place:
+  tag "check": "Perform the following to determine if the recommended state is in place:
   • Open the MySQL configuration (e.g. my.cnf) file and search for skip-grant-tables
   • Ensure skip-grant-tables is set to FALSE"
   tag "fix": "Perform the following to establish the recommended state:

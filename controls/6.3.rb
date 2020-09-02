@@ -11,7 +11,7 @@ control '6.3' do
   tag "cis_level": 2
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'log_warnings';
   Ensure the Value returned equals 2."
   tag "fix": "Perform the following actions to remediate this setting:

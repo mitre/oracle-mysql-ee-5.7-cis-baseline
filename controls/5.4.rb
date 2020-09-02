@@ -8,7 +8,7 @@ control '5.4' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to audit this setting:
+  tag "check": "Execute the following SQL statement to audit this setting:
     select user, host from mysql.user where Super_priv = 'Y';
   Ensure only administrative users are returned in the result set."
   tag "fix": "Perform the following steps to remediate this setting:

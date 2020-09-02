@@ -8,7 +8,7 @@ control '5.8' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to audit this setting:
+  tag "check": "Execute the following SQL statement to audit this setting:
       SELECT user, host FROM mysql.user WHERE Repl_slave_priv = 'Y';
   Ensure only accounts designated for slave users are granted this privilege."
   tag "fix": "Perform the following steps to remediate this setting:

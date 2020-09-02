@@ -8,7 +8,7 @@ control '8.2' do
   tag "cis_level": 1
   tag "nist": ['SC-8 (2)', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statements to assess this recommendation:
     SELECT user, host, ssl_type FROM mysql.user
     WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');

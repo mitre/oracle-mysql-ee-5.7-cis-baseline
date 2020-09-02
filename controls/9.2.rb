@@ -8,7 +8,7 @@ control '9.2' do
   tag "cis_level": 1
   tag "nist": ['SC-23', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "To assess this recommendation, issue the following statement:
+  tag "check": "To assess this recommendation, issue the following statement:
   select ssl_verify_server_cert from mysql.slave_master_info;
   Verify the value of ssl_verify_server_cert is 1."
   tag "fix": "To remediate this setting you must use the CHANGE MASTER TO command.

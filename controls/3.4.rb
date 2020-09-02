@@ -10,7 +10,7 @@ control '3.4' do
   tag "cis_level": 1
   tag "nist": ['AU-9', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Perform the following steps to assess this recommendation:
+  tag "check": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of slow_query_log_file
   show variables like 'slow_query_log_file';
   • Execute the following command at a terminal prompt to list all slow_query_log_file.* files

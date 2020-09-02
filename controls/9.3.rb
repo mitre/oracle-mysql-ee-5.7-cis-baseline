@@ -8,7 +8,7 @@ control '9.3' do
   tag "cis_level": 2
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SHOW GLOBAL VARIABLES LIKE 'master_info_repository';
   The result should be TABLE instead of FILE.
   NOTE: There also should not be a master.info file in the datadir."

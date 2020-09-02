@@ -9,7 +9,7 @@ control '5.1' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statement(s) to assess this recommendation:
 
     SELECT user, host

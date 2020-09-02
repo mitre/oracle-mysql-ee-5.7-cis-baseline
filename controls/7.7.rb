@@ -9,7 +9,7 @@ control '7.7' do
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SELECT user, host FROM mysql.user WHERE host = '%';
   Ensure no rows are returned."
   tag "fix": "Perform the following actions to remediate this setting:

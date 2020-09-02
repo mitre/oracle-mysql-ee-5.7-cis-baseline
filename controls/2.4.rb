@@ -8,7 +8,7 @@ control '2.4' do
   tag "cis_level": 2
   tag "nist": ['IA-5(2)', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
-  tag "audit text": 'Review all cryptographic material and check to see if any of it is default or is used for other MySQL instances or for purposes other than MySQL'
+  tag "check": 'Review all cryptographic material and check to see if any of it is default or is used for other MySQL instances or for purposes other than MySQL'
   tag "fix": 'Generate new certificates, keys, and other cryptographic material as needed for each affected MySQL instance'
   describe 'A manual review is required to ensure the default or shared cryptographic material is not being used' do
     skip 'A manual review is required to ensure the default or shared cryptographic material is not being used'

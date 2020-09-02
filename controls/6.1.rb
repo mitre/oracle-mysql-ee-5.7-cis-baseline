@@ -8,7 +8,7 @@ control '6.1' do
   tag "cis_level": 1
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statement to audit this setting:
     SHOW variables LIKE 'log_error';
   Ensure the Value returned is not empty."

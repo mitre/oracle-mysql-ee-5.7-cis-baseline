@@ -9,7 +9,7 @@ control '4.6' do
   tag "cis_level": 1
   tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SHOW variables LIKE 'have_symlink';
   Ensure the Value returned is DISABLED."
   tag "fix": "Perform the following actions to remediate this setting:

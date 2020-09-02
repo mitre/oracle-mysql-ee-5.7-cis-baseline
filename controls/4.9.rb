@@ -8,7 +8,7 @@ control '4.9' do
   tag "cis_level": 2
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "To audit for this recommendation execute the following query:
+  tag "check": "To audit for this recommendation execute the following query:
     SHOW VARIABLES LIKE 'sql_mode';
   Ensure that STRICT_ALL_TABLES is in the list returned."
   tag "fix": "Perform the following actions to remediate this setting:

@@ -9,7 +9,7 @@ control '1.3' do
   tag "cis_level": 2
   tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
-  tag "audit text": "Execute the following commands to assess this recommendation:
+  tag "check": "Execute the following commands to assess this recommendation:
   find /home -name '.mysql_history'
   For each file returned determine whether that file is symbolically linked to /dev/null."
   tag "fix": "Perform the following steps to remediate this setting:

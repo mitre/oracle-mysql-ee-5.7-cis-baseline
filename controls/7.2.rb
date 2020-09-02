@@ -9,7 +9,7 @@ control '7.2' do
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statement and ensure the Value field is not set to ON:
     SHOW VARIABLES WHERE Variable_name = 'secure_auth';"
   tag "fix": "
