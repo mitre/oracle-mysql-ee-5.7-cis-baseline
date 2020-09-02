@@ -7,7 +7,7 @@ control '8.1' do
   tag "cis_level": 1
   tag "nist": ['SC-8 (2)', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statements to assess this recommendation:
+  tag "check": "Execute the following SQL statements to assess this recommendation:
   SHOW variables WHERE variable_name = 'have_ssl';
   Ensure the Value returned is YES.
   NOTE: have_openssl is an alias for have_ssl as of MySQL 5.0.38. MySQL can be build

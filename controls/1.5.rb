@@ -7,7 +7,7 @@ control '1.5' do
   tag "cis_level": 2
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
-  tag "audit text": "Execute the following command to assess this recommendation
+  tag "check": "Execute the following command to assess this recommendation
   getent passwd mysql | egrep '^.*[\/bin\/false|\/sbin\/nologin]$''
   Lack of output implies a finding"
   tag "fix": "Perform the following steps to remediate this setting:

@@ -10,7 +10,7 @@ control '3.2' do
   tag "cis_level": 1
   tag "nist": ['AC-3', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Perform the following steps to assess this recommendation:
+  tag "check": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of log_bin_basename
       show variables like 'log_bin_basename';
   • Execute the following command at a terminal prompt to list all log_bin_basename.* files

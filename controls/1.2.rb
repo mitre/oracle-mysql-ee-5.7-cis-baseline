@@ -7,7 +7,7 @@ control '1.2' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Execute the following command at a terminal prompt to assess this recommendation:
+  tag "check": "Execute the following command at a terminal prompt to assess this recommendation:
   ps -ef | egrep '^mysql.*$''
   If no lines are returned, then this is a finding.
   NOTE: It is assumed that the MySQL user is mysql. Additionally, you may consider running

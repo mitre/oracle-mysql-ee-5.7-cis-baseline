@@ -7,7 +7,7 @@ control '6.10' do
   tag "cis_level": 2
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy';
+  tag "check": "SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy';
   It must return ALL"
   tag "fix": "Add this to the mysqld section of the mysql configuration file and restart the server:
   audit_log_statement_policy='ALL'"

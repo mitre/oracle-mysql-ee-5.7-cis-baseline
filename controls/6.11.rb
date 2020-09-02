@@ -7,7 +7,7 @@ control '6.11' do
   tag "cis_level": 2
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "To assess this recommendation, execute the following SQL statement:
+  tag "check": "To assess this recommendation, execute the following SQL statement:
     SHOW GLOBAL VARIABLES LIKE 'audit_log_strategy';
   The result should be SYNCHRONOUS or SEMISYNCHRONOUS"
   tag "fix": "To remediate this configuration:

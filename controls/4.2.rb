@@ -8,7 +8,7 @@ control '4.2' do
   tag "cis_level": 1
   tag "nist": ['CM-7', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statement to determine if the test database is present:
     SHOW DATABASES LIKE 'test';
   The above SQL statement will return zero rows"

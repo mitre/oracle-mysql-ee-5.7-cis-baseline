@@ -8,7 +8,7 @@ control '4.8' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement and ensure one row is returned:
+  tag "check": "Execute the following SQL statement and ensure one row is returned:
     SHOW GLOBAL VARIABLES WHERE Variable_name = 'secure_file_priv' AND Value<>'';
   Note: The Value should contain a valid path."
   tag "fix": "Add the following line to the [mysqld] section of the MySQL configuration file and restart the MySQL service:

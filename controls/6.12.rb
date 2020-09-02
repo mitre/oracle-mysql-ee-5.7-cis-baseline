@@ -7,7 +7,7 @@ control '6.12' do
   tag "cis_level": 1
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "To assess this recommendation, execute the following SQL statement:
+  tag "check": "To assess this recommendation, execute the following SQL statement:
     SELECT LOAD_OPTION FROM information_schema.plugins WHERE PLUGIN_NAME='audit_log';
   The result must be FORCE_PLUS_PERMANENT"
   tag "fix": "To remediate this setting, follow these steps:

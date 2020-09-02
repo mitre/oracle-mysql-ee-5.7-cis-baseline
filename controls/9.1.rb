@@ -10,7 +10,7 @@ control '9.1' do
   tag "cis_level": 1
   tag "nist": ['SC-8', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Check if the replication traffic is using one or more of the following to provide confidentiality and integrity for the traffic, and mutual authentication for the servers:
+  tag "check": "Check if the replication traffic is using one or more of the following to provide confidentiality and integrity for the traffic, and mutual authentication for the servers:
     • A private network
     • A VPN
     • SSL/TLS

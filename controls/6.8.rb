@@ -7,7 +7,7 @@ control '6.8' do
   tag "cis_level": 1
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "SHOW GLOBAL VARIABLES LIKE 'audit_log_policy';
+  tag "check": "SHOW GLOBAL VARIABLES LIKE 'audit_log_policy';
   The result must be LOGINS or ALL."
   tag "fix": "Set audit_log_policy='ALL' or audit_log_policy='LOGINS' in the MySQL configuration file and activate the setting by restarting the server or executing
    SET GLOBAL audit_log_policy='ALL'; or SET GLOBAL audit_log_policy='LOGINS';"

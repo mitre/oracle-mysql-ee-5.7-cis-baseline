@@ -8,7 +8,7 @@ control '6.4' do
   tag "cis_level": 1
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Perform the following actions to assess this recommendation:
   • Open the MySQL configuration file (my.cnf)
   • Ensure the log-raw entry is present

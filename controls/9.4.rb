@@ -9,7 +9,7 @@ control '9.4' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to audit this setting:
+  tag "check": "Execute the following SQL statement to audit this setting:
     select user, host from mysql.user where user='repl' and Super_priv = 'Y';
   No rows should be returned.
   NOTE: Substitute your replication user's name for repl in the above query."

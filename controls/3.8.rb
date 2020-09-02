@@ -8,7 +8,7 @@ control '3.8' do
   tag "cis_level": 1
   tag "nist": ['AC-3', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "To assess this recommendation, execute the following SQL statement to discover the Value of plugin_dir:
+  tag "check": "To assess this recommendation, execute the following SQL statement to discover the Value of plugin_dir:
   show variables where variable_name = 'plugin_dir';
 
   Then, execute the following command at a terminal prompt (using the discovered plugin_dir Value) to determine the permissions and ownership.

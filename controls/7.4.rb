@@ -12,7 +12,7 @@ control '7.4' do
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statements to assess this recommendation:
       SELECT @@global.sql_mode;
       SELECT @@session.sql_mode;

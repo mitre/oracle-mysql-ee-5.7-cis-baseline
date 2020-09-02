@@ -7,7 +7,7 @@ control '3.1' do
   tag "cis_level": 1
   tag "nist": ['AC-3', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Perform the following steps to assess this recommendation:
+  tag "check": "Perform the following steps to assess this recommendation:
   • Execute the following SQL statement to determine the Value of datadir
       show variables where variable_name = 'datadir';
   • Execute the following command at a terminal prompt

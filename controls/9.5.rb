@@ -7,7 +7,7 @@ control '9.5' do
   tag "cis_level": 1
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL statement to assess this recommendation:
+  tag "check": "Execute the following SQL statement to assess this recommendation:
     SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';
   Ensure no rows are returned."
   tag "fix": "Perform the following actions to remediate this setting:

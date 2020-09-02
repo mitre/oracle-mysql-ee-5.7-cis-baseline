@@ -8,7 +8,7 @@ control '4.1' do
   tag "cis_level": 1
   tag "nist": ['SI-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "
+  tag "check": "
   Execute the following SQL statement to identify the MySQL server version:
     SHOW VARIABLES WHERE Variable_name LIKE 'version';
   Now compare the version with the security announcements from Oracle and/or the OS if the OS packages are used"

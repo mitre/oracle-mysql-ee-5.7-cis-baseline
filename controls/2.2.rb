@@ -7,7 +7,7 @@ control '2.2' do
   tag "cis_level": 1
   tag "nist": ['IA-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Check the process or task list if the password is visible.
+  tag "check": "Check the process or task list if the password is visible.
   Check the shell or command history if the password is visible"
   tag "fix": 'Use -p without password and then enter the password when prompted, use a properly secured .my.cnf file, or store authentication information in encrypted format in .mylogin.cnf'
 

@@ -9,7 +9,7 @@ control '7.8' do
   tag "nist": ['AC-6', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
-  tag "audit text": "Execute the following SQL query to identify anonymous accounts:
+  tag "check": "Execute the following SQL query to identify anonymous accounts:
   SELECT user,host FROM mysql.user WHERE user = '';
   The above query will return zero rows if no anonymous accounts are present."
   tag "fix": "Perform the following actions to remediate this setting:

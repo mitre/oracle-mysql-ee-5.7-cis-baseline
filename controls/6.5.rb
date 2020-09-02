@@ -7,7 +7,7 @@ control '6.5' do
   tag "cis_level": 1
   tag "nist": ['AU-2', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
-  tag "audit text": "To assess this recommendation, execute the following SQL statement:
+  tag "check": "To assess this recommendation, execute the following SQL statement:
     show variables like '%audit_log_connection_policy%';
   Ensure the value is set to either ERRORS or ALL.
   "

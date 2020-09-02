@@ -8,7 +8,7 @@ control '3.7' do
   tag "cis_level": 1
   tag "nist": ['AC-3', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "To assess this recommendation, locate the SSL key in use by executing the following SQL statement to get the Value of ssl_key:
+  tag "check": "To assess this recommendation, locate the SSL key in use by executing the following SQL statement to get the Value of ssl_key:
   show variables where variable_name = 'ssl_key';
   Then, execute the following command to assess the permissions of the Value:
   ls -l <ssl_key Value> | egrep '^-r--------[ \t]*.[ \t]*mysql[ \t]*mysql.*$'
