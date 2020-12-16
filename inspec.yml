@@ -23,7 +23,7 @@ inputs:
 
   - name: host
     description: 'hostname MSSQL DB Server'
-    value: 'test.cjwekmnpixnv.us-east-2.rds.amazonaws.com'
+    value: 'localhost'
 
   - name: port
     description: 'port MSSQL DB Server'
