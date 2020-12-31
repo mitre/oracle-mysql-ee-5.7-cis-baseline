@@ -6,7 +6,7 @@ copyright_email: .
 summary: The CIS Oracle MySQL Server Enterprise Edition Benchmark InSpec profile.
 license: Apache-2.0
 Description: An InSpec Compliance Profile. 
-version: 0.1.1
+version: 1.0.5
 inspec_version: ">= 4.0"
 
 inputs:
