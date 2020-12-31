@@ -2,32 +2,33 @@ name: oracle-mysql-ee-5.7-cis-baseline
 title: CIS baseline for Oracle MySQL server enterprise edition 5.7
 maintainer: MITRE InSpec Team
 copyright: The MITRE Corporation, 2018
-copyright_email: opensource@mitre.org
+copyright_email: .
 summary: The CIS Oracle MySQL Server Enterprise Edition Benchmark InSpec profile.
 license: Apache-2.0
 Description: An InSpec Compliance Profile. 
 version: 0.1.0
 inspec_version: ">= 4.0"
-supports:
-  platform: os
 
-attributes:
+inputs:
   - name: user
-    description: 'username MSSQL DB Server'
+    description: 'username MySQL DB Server'
     type: string
-    value: 'test'
+    value: ''
+    sensitive: true
 
   - name: password
-    description: 'password MSSQL DB Server'
+    description: 'password MySQL DB Server'
     type: string
-    value: 'test1234'
+    value: ''
+    sensitive: true
 
   - name: host
-    description: 'hostname MSSQL DB Server'
-    value: 'test.cjwekmnpixnv.us-east-2.rds.amazonaws.com'
+    description: 'hostname of MySQL DB Server'
+    value: ''
+    sensitive: true
 
   - name: port
-    description: 'port MSSQL DB Server'
+    description: 'port MySQL DB Server'
     type: numeric
     value: 3306
 
