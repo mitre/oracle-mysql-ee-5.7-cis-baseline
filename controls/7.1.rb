@@ -25,7 +25,7 @@ control '7.1' do
 
   old_passwords = sql_session.query(query).stdout.strip
 
-  describe 'The MySQL old_passwords variable set to: #{old_passwords}' do
+  describe "The MySQL old_passwords variable set to: #{old_passwords}" do
     subject { old_passwords }
     it { should_not cmp 1 }
   end
