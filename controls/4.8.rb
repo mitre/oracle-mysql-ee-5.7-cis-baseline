@@ -20,7 +20,7 @@ control '4.8' do
   sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
 
   secure_file_priv = sql_session.query(query).stdout.strip
-  describe 'The secure_file_priv variable: #{secure_file_priv}' do
+  describe "The secure_file_priv variable: #{secure_file_priv}" do
     subject { secure_file_priv }
     it { should_not be_empty }
   end
