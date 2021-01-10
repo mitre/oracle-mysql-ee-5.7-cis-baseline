@@ -23,7 +23,7 @@ control '7.2' do
 
   secure_auth = sql_session.query(query).stdout.strip
 
-  describe 'The MySQL secure_auth' do
+  describe 'The MySQL secure_auth variable set to: #{secure_auth}' do
     subject { secure_auth }
     it { should cmp 1 }
   end
