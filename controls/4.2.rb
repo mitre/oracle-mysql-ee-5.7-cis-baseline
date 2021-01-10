@@ -22,7 +22,7 @@ control '4.2' do
 
   database_present = sql_session.query(query).stdout.strip
 
-  describe 'The check wether the test database is installed' do
+  describe 'The check whether the test database is installed' do
     subject { database_present }
     it { should be_empty }
   end
