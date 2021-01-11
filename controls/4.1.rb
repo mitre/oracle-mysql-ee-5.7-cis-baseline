@@ -18,9 +18,9 @@ control '4.1' do
 
   mysql_version = sql_session.query(query).stdout.strip
 
-  describe 'The mysql version installed' do
+  describe "The mysql version installed: #{mysql_version}" do
     subject { mysql_version }
-    it { should cmp >= '5.7.24-enterprise-commercial-advanced' }
+    it { should cmp >= input('approved_mysql_version') }
   end
   only_if { os.linux? }
 end
