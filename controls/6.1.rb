@@ -21,7 +21,7 @@ control '6.1' do
 
   log_error = sql_session.query(query).stdout.strip.split
 
-  describe 'The MySQL log_error' do
+  describe "The MySQL log_error variable set to: #{log_error}" do
     subject { log_error }
     it { should_not be_empty }
   end

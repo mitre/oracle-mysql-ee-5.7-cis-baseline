@@ -16,7 +16,7 @@ control '9.5' do
   query = "SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';"
   sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
   wildcard_hostname = sql_session.query(query).stdout.strip
-  describe 'The replication users with the super_priv not set to Y' do
+  describe 'The list of replication users with wildcard hostnames' do
     subject { wildcard_hostname }
     it { should be_empty }
   end
