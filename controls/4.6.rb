@@ -24,12 +24,12 @@ control '4.6' do
   query = %(select @@have_symlink;)
   sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
   have_symlink = sql_session.query(query).stdout.strip
-  describe 'The MySQL have_symlink setting' do
-    subject { have_symlink }
-    it { should cmp 'DISABLED' }
-  end
 
   describe.one do
+    describe 'The MySQL have_symlink setting' do
+      subject { have_symlink }
+      it { should cmp 'DISABLED' }
+    end
     describe mysql_conf.params('mysqld') do
       its('skip_symbolic_links') { should eq '1' }
     end

@@ -31,5 +31,6 @@ control '1.3' do
       its('link_path') { should eq '/dev/null' }
     end
   end
+  only_if { history_files.count.positive? }
   only_if { os.linux? }
 end

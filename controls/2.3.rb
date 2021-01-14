@@ -1,36 +1,28 @@
 # frozen_string_literal: true
 
-control '2.3' do
-  title 'Do Not Reuse User Accounts (Not Scored)'
-  desc  'Database user accounts should not be reused for multiple applications or users.'
+control '2.2' do
+  title ' Do Not Specify Passwords in Command Line (Not Scored)'
+  desc  "When a command is executed on the command line, for example mysql -u admin - p password, the password may be visible in the user's shell/command history or in the process list"
   impact 0.5
   tag "severity": 'medium'
-  tag "cis_id": '2.3'
+  tag "cis_id": '2.2'
   tag "cis_level": 1
-  tag "nist": %w[AC-6 Rev_4]
+  tag "nist": %w[IA-6 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
-  tag "audit text": "Each user should be linked to one of these
-    • system accounts
-    • a person
-    • an application"
-  tag "fix": 'Add/Remove users so that each user is only used for one specific purpose'
+  tag "audit text": "Check the process or task list if the password is visible.
+  Check the shell or command history if the password is visible"
+  tag "fix": 'Use -p without password and then enter the password when prompted, use a properly secured .my.cnf file, or store authentication information in encrypted format in .mylogin.cnf'
 
-  query = 'SELECT User FROM mysql.user;'
+  bash_history_files = command("find / -name '.bash_history'").stdout.strip.split("\n")
 
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
+  only_if('.bash_history file does not exists.') do
+    bash_history_files.any?
+  end
 
-  mysql_account_list = sql_session.query(query).stdout.strip.split("\n")
-  if !mysql_account_list.empty?
-    mysql_account_list.each do |user|
-      describe "Mysql database user: #{user}" do
-        subject { user }
-        it { should be_in input('mysql_users') }
-      end
-    end
-  else
-    impact 0.0
-    describe 'There are no mysql database users, therefore this control is not applicable' do
-      skip 'There are no mysql database users, therefore this control is not applicable'
+  bash_history_files.each do |bash_history_file|
+    describe "The linux bash history file : #{bash_history_file}" do
+      subject { file(bash_history_file.to_s) }
+      its('content') { should_not include input('password') }
     end
   end
   only_if { os.linux? }

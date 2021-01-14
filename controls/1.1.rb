@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 control '1.1' do
-  title '1.1 Place Databases on Non-System Partitions (Scored)'
+  title 'Place Databases on Non-System Partitions (Scored)'
   desc  "It is generally accepted that host operating systems should include different filesystem partitions for different purposes.
   One set of filesystems are typically called system partitions, and are generally reserved for host system/application operation.
   The other set of filesystems are typically called non-system partitions, and such locations are generally reserved for storing data."

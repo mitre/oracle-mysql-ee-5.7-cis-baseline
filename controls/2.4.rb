@@ -1,19 +1,37 @@
 # frozen_string_literal: true
 
-control '2.4' do
-  title 'Do Not Use Default or Shared Cryptographic Material (Not Scored)'
-  desc  "The cryptographic material used by MySQL, such as digital certificates and encryption keys, should be used only for MySQL and only for one instance.
-  Default cryptographic material should not be used because others are likely to have copies of them"
+control '2.3' do
+  title 'Do Not Reuse User Accounts (Not Scored)'
+  desc  'Database user accounts should not be reused for multiple applications or users.'
   impact 0.5
   tag "severity": 'medium'
-  tag "cis_id": '2.4'
-  tag "cis_level": 2
-  tag "nist": ['IA-5(2)', 'Rev_4']
-  tag "Profile Applicability": 'Level 2 - MySQL RDBMS on Linux'
-  tag "audit text": 'Review all cryptographic material and check to see if any of it is default or is used for other MySQL instances or for purposes other than MySQL'
-  tag "fix": 'Generate new certificates, keys, and other cryptographic material as needed for each affected MySQL instance'
-  describe 'A manual review is required to ensure the default or shared cryptographic material is not being used' do
-    skip 'A manual review is required to ensure the default or shared cryptographic material is not being used'
+  tag "cis_id": '2.3'
+  tag "cis_level": 1
+  tag "nist": %w[AC-6 Rev_4]
+  tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
+  tag "audit text": "Each user should be linked to one of these
+    • system accounts
+    • a person
+    • an application"
+  tag "fix": 'Add/Remove users so that each user is only used for one specific purpose'
+
+  query = 'SELECT User FROM mysql.user;'
+
+  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
+
+  mysql_account_list = sql_session.query(query).stdout.strip.split("\n")
+  if !mysql_account_list.empty?
+    mysql_account_list.each do |user|
+      describe "Mysql database user: #{user}" do
+        subject { user }
+        it { should be_in input('mysql_users') }
+      end
+    end
+  else
+    impact 0.0
+    describe 'There are no mysql database users, therefore this control is not applicable' do
+      skip 'There are no mysql database users, therefore this control is not applicable'
+    end
   end
   only_if { os.linux? }
 end
