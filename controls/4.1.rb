@@ -11,18 +11,17 @@ control '4.1' do
   tag "nist": %w[SI-2 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "
-  Execute the following SQL statement to identify the MySQL server version:
-    SHOW VARIABLES WHERE Variable_name LIKE 'version';
-  Now compare the version with the security announcements from Oracle and/or the OS if the OS packages are used"
+      Execute the following SQL statement to identify the MySQL server version:
+      SHOW VARIABLES WHERE Variable_name LIKE 'version';
+      Now compare the version with the security announcements from Oracle and/or the OS if the OS packages are used"
   tag "fix": 'Install the latest patches for your version or upgrade to the latest version'
-  query = %(select @@version;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  mysql_version = sql_session.query(query).stdout.strip
+  mysql_version = mysql_session(
+    attribute('user'), attribute('password'), attribute('host')
+  ).query("select @@version;").stdout.strip
 
   describe 'The mysql version installed' do
     subject { mysql_version }
-    it { should cmp >= '5.7.24-enterprise-commercial-advanced' }
+    it { should cmp >= '8.0.20-11' }
   end
   only_if { os.linux? }
 end

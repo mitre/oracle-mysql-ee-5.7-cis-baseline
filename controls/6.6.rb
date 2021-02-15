@@ -17,13 +17,12 @@ control '6.6' do
   Or set audit_log_exclude_accounts=NULL in my.cnf."
   tag "Default Value": 'audit_log_exclude_accounts is set to NULL by default'
 
-  query = %(SELECT @@audit_log_exclude_accounts;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  audit_log_exclude_accounts = sql_session.query(query).stdout.strip
-
+  audit_log_exclude_accounts = mysql_session(
+    input('user'), input('password'), input('host'), input('port')
+  ).query("SELECT @@audit_log_exclude_accounts;").stdout.strip
+  puts "audit_log_exclude_accounts = #{audit_log_exclude_accounts}"
   describe 'The MySQL audit_log_exclude_accounts' do
     subject { audit_log_exclude_accounts }
-    it { should cmp 'NULL' }
+    it { should eq 'NULL' }
   end
 end

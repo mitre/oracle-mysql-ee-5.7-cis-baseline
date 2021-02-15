@@ -15,13 +15,19 @@ control '6.10' do
   audit_log_statement_policy='ALL'"
   tag "Default Value": 'ALL'
 
-  query = %(select @@log_error;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  log_error = sql_session.query(query).stdout.strip.split
-
+  log_error = mysql_session(input('user'), input('password'), input('host'), input('port')).query("select @@log_error;").stdout.strip
+  puts "select @@log_error; = #{log_error}"
   describe 'The MySQL log_error' do
     subject { log_error }
     it { should_not be_empty }
   end
+ ## THis or that
+  log_error = mysql_session(input('user'), input('password'), input('host'), input('port')).query("SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy';").stdout.strip
+  puts "SHOW GLOBAL VARIABLES LIKE 'audit_log_statement_policy' = #{log_error}"
+  describe 'The MySQL log_error' do
+    subject { log_error }
+    it { should_not be_empty }
+  end
+
 end

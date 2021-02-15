@@ -17,13 +17,10 @@ control '8.1' do
   tag "fix": 'Follow the procedures as documented in the MySQL 5.6 Reference Manual to setup SSL.'
   tag "Default Value": 'DISABLED'
 
-  query = %(SELECT @@have_ssl;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  have_ssl = sql_session.query(query).stdout.strip
+  have_ssl = mysql_session(input('user'), input('password'), input('host')).query("SELECT @@have_ssl;").stdout.strip
 
   describe 'The MySQL have_ssl variable' do
     subject { have_ssl }
-    it { should cmp 'YES' }
+    it { should eq 'YES' }
   end
 end

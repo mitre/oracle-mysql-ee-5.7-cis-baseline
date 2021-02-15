@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 control '8.2' do
   title "Ensure 'ssl_type' Is Set to 'ANY', 'X509', or 'SPECIFIED' for All Remote Users (Scored)"
   desc  "All network traffic must use SSL/TLS when traveling over untrusted networks.
@@ -22,35 +20,40 @@ control '8.2' do
   which can be used to further restrict connection options."
   tag "Default Value": 'Not enforced (ssl_type is empty)'
 
-  query = %{SELECT user FROM mysql.user WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');}
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
 
-  remote_users = sql_session.query(query).stdout.strip.split("\n")
+  sql_session = mysql_session(input('user'), input('password'), input('host'))
+  remote_users = sql_session.query("SELECT user FROM mysql.user WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');"
+                ).stdout.strip.split("\n")
 
-  remote_users.each do |user|
-    query_ssl_type = "SELECT ssl_type FROM mysql.user
-    WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost') AND user = '#{user}';"
-    ssl_type = sql_session.query(query_ssl_type).stdout.strip
+  if !remote_users.empty?
+    remote_users.each do |user|
+      query_ssl_type = "SELECT ssl_type FROM mysql.user
+      WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost') AND user = '#{user}';"
+      ssl_type = sql_session.query(query_ssl_type).stdout.strip
+      #puts "User = #{user} , ssl_type = #{ssl_type} "
 
-    describe.one do
-      describe "The ssl_type for remote user: #{user}" do
-        subject { ssl_type }
-        it { should cmp 'ANY' }
-      end
-      describe "The ssl_type for remote user: #{user}" do
-        subject { ssl_type }
-        it { should cmp 'X509' }
-      end
-      describe "The ssl_type for remote user: #{user}" do
-        subject { ssl_type }
-        it { should cmp 'SPECIFIED' }
+      describe.one do
+        describe "The ssl_type for remote user: #{user}" do
+          subject { ssl_type }
+          it { should cmp 'ANY' }
+        end
+        describe "The ssl_type for remote user: #{user}" do
+          subject { ssl_type }
+          it { should cmp 'X509' }
+        end
+        describe "The ssl_type for remote user: #{user}" do
+          subject { ssl_type }
+          it { should cmp 'SPECIFIED' }
+        end
       end
     end
   end
+
   if remote_users.empty?
     impact 0.0
     describe 'There are no mysql remote users, therefore this control is not applicable' do
       skip 'There are no mysql remote users, therefore this control is not applicable'
     end
   end
+
 end

@@ -15,19 +15,18 @@ control '6.8' do
    SET GLOBAL audit_log_policy='ALL'; or SET GLOBAL audit_log_policy='LOGINS';"
   tag "Default Value": 'ALL'
 
-  query = %(SELECT @@audit_log_policy;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  audit_log_policy = sql_session.query(query).stdout.strip
-
+  audit_log_policy = mysql_session(
+    input('user'), input('password'), input('host'), input('port')
+  ).query("SELECT @@audit_log_policy;").stdout.strip
+  puts "audit_log_policy = #{audit_log_policy}"
   describe.one do
     describe 'The MySQL audit_log_policy' do
       subject { audit_log_policy }
-      it { should cmp 'ALL' }
+      it { should eq 'ALL' }
     end
     describe 'The MySQL audit_log_policy' do
       subject { audit_log_policyy }
-      it { should cmp 'LOGINS' }
+      it { should eq 'LOGINS' }
     end
   end
 end

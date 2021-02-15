@@ -11,20 +11,17 @@ control '4.2' do
   tag "nist": %w[CM-7 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
-  Execute the following SQL statement to determine if the test database is present:
-    SHOW DATABASES LIKE 'test';
-  The above SQL statement will return zero rows"
+      Execute the following SQL statement to determine if the test database is present:
+      SHOW DATABASES LIKE 'test';
+      The above SQL statement will return zero rows"
   tag "fix": "Execute the following SQL statement to drop the test database:
-    DROP DATABASE 'test';
-  Note: mysql_secure_installation performs this operation as well as other security- related activities"
+      DROP DATABASE 'test';
+      Note: mysql_secure_installation performs this operation as well as other security- related activities"
 
-  query = %(SHOW DATABASES LIKE 'test';)
 
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  database_present = sql_session.query(query).stdout.strip
-
-  describe 'The check wether the test database is installed' do
+  database_present = mysql_session(attribute('user'), attribute('password'), attribute('host')).query("SHOW DATABASES LIKE 'test';").stdout.strip
+  puts "Database present = #{database_present} "
+  describe 'To check wether the test database is installed'  do
     subject { database_present }
     it { should be_empty }
   end

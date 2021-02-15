@@ -10,11 +10,11 @@ control '4.3' do
   tag "nist": %w[CM-7 Rev_4]
   tag "Profile Applicability": 'Level 2 - MySQL RDBMS'
   tag "audit text": "Perform the following to determine if the recommended state is in place:
-  • Ensure --allow-suspicious-udfs is not specified in the the mysqld start up command line.
-  • Ensure allow-suspicious-udfs is set to FALSE in the MySQL configuration."
+      • Ensure --allow-suspicious-udfs is not specified in the the mysqld start up command line.
+      • Ensure allow-suspicious-udfs is set to FALSE in the MySQL configuration."
   tag "fix": "Perform the following to establish the recommended state:
-  • Remove --allow-suspicious-udfs from the mysqld start up command line.
-  • Remove allow-suspicious-udfs from the MySQL option file."
+      • Remove --allow-suspicious-udfs from the mysqld start up command line.
+      • Remove allow-suspicious-udfs from the MySQL option file."
   tag "Default Value": 'FALSE'
 
   describe mysql_conf do
@@ -22,6 +22,8 @@ control '4.3' do
   end
 
   describe command('ps aux | grep mysql') do
+    # puts "command output = "
+    puts command('ps aux | grep mysql').stdout
     its('stdout') { should_not match 'allow-suspicious-udfs' }
   end
 end

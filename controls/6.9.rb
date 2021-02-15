@@ -14,13 +14,12 @@ control '6.9' do
   tag "fix": "Set audit_log_policy='ALL' in the MySQL configuration file and activate the setting by restarting the server or executing SET GLOBAL audit_log_policy='ALL';"
   tag "Default Value": 'ALL'
 
-  query = %(SELECT @@audit_log_include_accounts;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  audit_log_policy = sql_session.query(query).stdout.strip
-
+  audit_log_policy = mysql_session(
+    input('user'), input('password'), input('host'), input('port')
+  ).query("SELECT @@audit_log_include_accounts;").stdout.strip
+  puts "SELECT @@audit_log_include_accounts; = #{audit_log_policy}"
   describe 'The MySQL audit_log_policy' do
     subject { audit_log_policy }
-    it { should cmp 'ALL' }
+    it { should eq 'ALL' }
   end
 end

@@ -15,13 +15,13 @@ control '4.4' do
       local-infile=0"
   tag "Default Value": 'ON'
 
-  query = %(select @@local_infile;)
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  local_infile = sql_session.query(query).stdout.strip
+  local_infile = mysql_session(attribute('user'), attribute('password'), attribute('host')).query("select @@local_infile;").stdout.strip
 
   describe 'The MySQL local_infile setting' do
     subject { local_infile }
     it { should cmp 0 }
   end
+  # describe mysql_conf do
+  #   its('local_infile') { should be_nil }
+  # end
 end
