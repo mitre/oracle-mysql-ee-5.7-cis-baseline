@@ -16,11 +16,11 @@ control '2.6' do
 
   sql_session = mysql_session(input('user'), input('password'), input('host'))
   remote_users = sql_session.query(" SELECT user, host, password_lifetime from mysql.user where password_lifetime IS NULL;"
-                ).stdout.strip.split("\n")
-
+                ).stdout.strip
+  puts "remote users= #{remote_users}"
   describe 'Password expiry for specific users provides user passwords with a unique time bounded lifetime.' do
     subject { remote_users }
-    it { should_be empty }
+    it { should be_empty}
   end
   only_if { os.linux? }
 
