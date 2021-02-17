@@ -9,29 +9,26 @@ control '8.2' do
   tag "nist": ['SC-8 (2)', 'Rev_4']
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS'
   tag "audit text": "
-  Execute the following SQL statements to assess this recommendation:
-    SELECT user, host, ssl_type FROM mysql.user
-    WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');
-  Ensure the ssl_type for each user returned is equal to ANY, X509, or SPECIFIED.
-  NOTE: have_openssl is an alias for have_ssl as of MySQL 5.0.38. MySQL can be build with OpenSSL or YaSSL."
+      Execute the following SQL statements to assess this recommendation:
+      SELECT user, host, ssl_type FROM mysql.user
+      WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');
+      Ensure the ssl_type for each user returned is equal to ANY, X509, or SPECIFIED.
+      NOTE: have_openssl is an alias for have_ssl as of MySQL 5.0.38. MySQL can be build with OpenSSL or YaSSL."
   tag "fix": "Use the GRANT statement to require the use of SSL:
-  GRANT USAGE ON *.* TO 'my_user'@'app1.example.com' REQUIRE SSL;
-  Note that REQUIRE SSL only enforces SSL. There are options like REQUIRE X509, REQUIRE ISSUER, REQUIRE SUBJECT
-  which can be used to further restrict connection options."
+       GRANT USAGE ON *.* TO 'my_user'@'app1.example.com' REQUIRE SSL;
+       Note that REQUIRE SSL only enforces SSL. There are options like REQUIRE X509, REQUIRE ISSUER, REQUIRE SUBJECT
+       which can be used to further restrict connection options."
   tag "Default Value": 'Not enforced (ssl_type is empty)'
 
 
   sql_session = mysql_session(input('user'), input('password'), input('host'))
   remote_users = sql_session.query("SELECT user FROM mysql.user WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost');"
                 ).stdout.strip.split("\n")
-
   if !remote_users.empty?
     remote_users.each do |user|
       query_ssl_type = "SELECT ssl_type FROM mysql.user
       WHERE HOST NOT IN ('::1', '127.0.0.1', 'localhost') AND user = '#{user}';"
       ssl_type = sql_session.query(query_ssl_type).stdout.strip
-      #puts "User = #{user} , ssl_type = #{ssl_type} "
-
       describe.one do
         describe "The ssl_type for remote user: #{user}" do
           subject { ssl_type }
