@@ -13,22 +13,20 @@ control '3.2' do
   tag "nist": %w[AC-3 Rev_4]
   tag "Profile Applicability": 'Level 1 - MySQL RDBMS on Linux'
   tag "audit text": "Perform the following steps to assess this recommendation:
-  • Execute the following SQL statement to determine the Value of log_bin_basename
-      show variables like 'log_bin_basename';
-  • Execute the following command at a terminal prompt to list all log_bin_basename.* files
-      ls <log_bin_basename>.*
-  • For each file listed, execute the following command
-      ls -l <log_bin_basename.nnnnn> | egrep '^-[r|w]{2}-[r|w]{2}----\s*.*$'
-  Lack of output implies a finding"
+      • Execute the following SQL statement to determine the Value of log_bin_basename
+        show variables like 'log_bin_basename';
+        • Execute the following command at a terminal prompt to list all log_bin_basename.* files
+        ls <log_bin_basename>.*
+        • For each file listed, execute the following command
+        ls -l <log_bin_basename.nnnnn> | egrep '^-[r|w]{2}-[r|w]{2}----\s*.*$'
+        Lack of output implies a finding"
   tag "fix": "Execute the following command for each log file location requiring corrected permissions and ownership:
-      chmod 660 <log file>
-      chown mysql:mysql <log file>"
+        chmod 660 <log file>
+        chown mysql:mysql <log file>"
 
-  query = %(select @@log_bin_basename;)
-
-  sql_session = mysql_session(input('user'), input('password'), input('host'), input('port'))
-
-  log_bin_basename = sql_session.query(query).stdout.strip.split.first
+  log_bin_basename = mysql_session(
+                      input('user'), input('password'), input('host')).query("select @@log_bin_basename;"
+                      ).stdout.strip.split.first
 
   only_if("#{log_bin_basename} directory exist.") do
     directory(log_bin_basename).exist?
@@ -38,7 +36,7 @@ control '3.2' do
     it { should exist }
     its('owner') { should eq 'mysql' }
     its('group') { should eq 'mysql' }
-    its('mode') { should be <= 0o660 }
+    its('mode') { should cmp '0660'}
   end
   only_if { os.linux? }
 end
