@@ -1,12 +1,12 @@
 name: oracle-mysql-ee-5.7-cis-baseline
-title: CIS baseline for Oracle MySQL server enterprise edition 5.7
+title: oracle-mysql-ee-5.7-cis-baseline
 maintainer: MITRE InSpec Team
 copyright: The MITRE Corporation, 2018
 copyright_email: .
-summary: The CIS Oracle MySQL Server Enterprise Edition Benchmark InSpec profile.
+summary: "InSpec Validation Profile for Oracle MySQL Server Enterprise Edition 5.7 CIS"
 license: Apache-2.0
 Description: An InSpec Compliance Profile. 
-version: 1.0.8
+version: 1.0.9
 inspec_version: ">= 4.0"
 
 inputs:
@@ -50,7 +50,8 @@ inputs:
   - name: mysql_administrative_users
     description: 'List of mysql administrative users'
     type: array
-    value: ['root'] 
+    value: ['root']
+    sensitive: true
 
   - name: mysql_users_allowed_modify_or_create
     description: 'List of mysql users allows to modify or create data structures'
