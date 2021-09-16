@@ -12,5 +12,4 @@ control '2.1' do
   describe 'A manual review is required to verfify a dedicated machine is running MySQL' do
     skip 'A manual review is required to verfify a dedicated machine is running MySQL'
   end
-
 end

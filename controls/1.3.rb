@@ -27,4 +27,5 @@ control '1.3' do
     subject { file(history_file.to_s) }
     its('link_path') { should eq '/dev/null' }
   end
+  only_if { os.linux? }
 end
