@@ -1,7 +1,6 @@
 # oracle-mysql-ee-5.7-cis-baseline
 
 InSpec profile to validate the secure configuration of Oracle MySQL Enterprise Edition version 5.7, against [CIS](https://www.cisecurity.org/cis-benchmarks/)'s Oracle MySQL Enterprise Edition 5.7 CIS Benchmark.
-
 ## Getting Started  
 It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__.
 
