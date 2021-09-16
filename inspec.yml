@@ -16,18 +16,18 @@ inputs:
   - name: user
     description: 'username MySQL DB Server'
     type: string
-    required: true
+    value: ''
     sensitive: true
 
   - name: password
     description: 'password MySQL DB Server'
     type: string
-    required: true
+    value: ''
     sensitive: true
 
   - name: host
     description: 'hostname of MySQL DB Server'
-    required: true
+    value: ''
     sensitive: true
 
   - name: port
