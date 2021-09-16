@@ -13,5 +13,4 @@ control '2.4' do
   describe 'A manual review is required to ensure the default or shared cryptographic material is not being used' do
     skip 'A manual review is required to ensure the default or shared cryptographic material is not being used'
   end
-
 end

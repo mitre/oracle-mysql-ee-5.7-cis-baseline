@@ -36,5 +36,5 @@ control '6.2' do
     subject { command("df -h #{global_log_bin_basename}").stdout }
     it { should_not include '/usr' }
   end
-
+  only_if { os.linux? }
 end
