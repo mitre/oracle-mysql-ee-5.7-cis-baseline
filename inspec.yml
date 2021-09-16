@@ -9,9 +9,6 @@ Description: An InSpec Compliance Profile.
 version: 1.10.0
 inspec_version: ">= 4.0"
 
-supports:
-  - platform-name: linux
-
 inputs:
   - name: user
     description: 'username MySQL DB Server'
