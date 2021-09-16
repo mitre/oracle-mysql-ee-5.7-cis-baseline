@@ -17,5 +17,5 @@ control '2.2' do
     subject { file(bash_history_file.to_s) }
     its('content') { should_not include attribute('password') }
   end
-  only_if { os.linux? }
+
 end

@@ -20,7 +20,6 @@ control '4.1' do
 
   describe "The mysql version installed: #{mysql_version}" do
     subject { mysql_version }
-    it { should cmp >= input('approved_mysql_version') }
+    it { should include >= /input('approved_mysql_version')*/ }
   end
-  only_if { os.linux? }
 end

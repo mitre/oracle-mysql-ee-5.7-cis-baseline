@@ -31,5 +31,5 @@ control '2.3' do
       skip 'There are no mysql database users, therefore this control is not applicable'
     end
   end
-  only_if { os.linux? }
+
 end

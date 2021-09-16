@@ -50,5 +50,5 @@ control '1.1' do
     subject { command("df -h #{datadir}").stdout }
     it { should_not include '/usr' }
   end
-  only_if { os.linux? }
+
 end

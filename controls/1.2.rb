@@ -17,5 +17,5 @@ control '1.2' do
     subject { command("ps -ef | egrep '^mysql.*$' | awk {'print $1'}").stdout.strip }
     it { should cmp 'mysql' }
   end
-  only_if { os.linux? }
+
 end

@@ -17,5 +17,5 @@ control '1.4' do
     subject { command('grep MYSQL_PWD /proc/*/environ').stdout.strip }
     it { should eq '' }
   end
-  only_if { os.linux? }
+
 end
