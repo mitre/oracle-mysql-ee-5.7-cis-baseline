@@ -29,5 +29,5 @@ control '3.9' do
     its('group') { should eq 'mysql' }
     its('mode') { should be <= 0660 }
   end
-  only_if { os.linux? }
+
 end

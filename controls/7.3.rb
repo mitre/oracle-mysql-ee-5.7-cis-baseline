@@ -19,5 +19,5 @@ control '7.3' do
   describe mysql_conf do
     its('client.password') { should be_nil }
   end
-  only_if { os.linux? }
+
 end

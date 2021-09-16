@@ -23,5 +23,5 @@ control '1.5' do
       its('shells') { should cmp '/sbin/nologin' }
     end
   end
-  only_if { os.linux? }
+
 end

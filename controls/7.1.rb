@@ -29,5 +29,5 @@ control '7.1' do
     subject { old_passwords }
     it { should_not cmp 1 }
   end
-  only_if { os.linux? }
+
 end
