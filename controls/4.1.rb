@@ -17,7 +17,7 @@ control '4.1' do
   sql_session = mysql_session(attribute('user'), attribute('password'), attribute('host'), attribute('port'))
 
   mysql_version = sql_session.query(query).stdout.strip
-  safe_mysql_version.scan(/\d\.*/).join
+  safe_mysql_version = mysql_version.scan(/\d\.*/).join
   describe "The mysql version installed: #{mysql_version}" do
     subject { safe_mysql_version }
     it { should cmp >= input('approved_mysql_version') }
